@@ -1,5 +1,5 @@
 <html>
-<title> # ChorMates </title>
+<title>ChorMates</title>
 
 <body>
 
