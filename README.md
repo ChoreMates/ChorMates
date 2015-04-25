@@ -15,7 +15,7 @@
   <li>workon chor_mates</li>
 </ul>  
 
-<p><h1> Coding Style </h1></p>
+<p><h3> Coding Style </h3></p>
 <p><a href="https://github.com/raywenderlich/swift-style-guide#naming"> Folow the swift style guide </a></p>
 
 
