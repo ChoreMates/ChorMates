@@ -1,5 +1,5 @@
 <html>
-<title>ChorMates</title>
+<title><h1>ChorMates</h1></title>
 
 <body>
 
