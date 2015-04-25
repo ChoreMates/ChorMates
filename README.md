@@ -3,7 +3,7 @@
 
 # ChorMates
 
-<p><h4>Welcome to ChorMates Repository. This is a mobile app, that keeps track of chors and budgets in a household. It's built with XCode6.3, and Swift1.2 iOS programming language</h4></p>
+<p><h5>Welcome to ChorMates Repository. This is a mobile app, that keeps track of chors and budgets in a household. It's built with XCode6.3, and Swift1.2 iOS programming language</h5></p>
 
 <p><h1> Project Setup </h1></p>
 <p> Install pip, vritual enviroment and create the enviroment for our project: </p>
