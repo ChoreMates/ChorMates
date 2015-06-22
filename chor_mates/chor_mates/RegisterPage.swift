@@ -6,4 +6,72 @@
 //  Copyright (c) 2015 ChorMates. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Parse
+
+class RegisterPage: ViewTextController {
+    
+    @IBOutlet weak var fName: UITextField!
+    @IBOutlet weak var lName: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var valPass: UITextField!
+    @IBOutlet weak var allSet: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func DismissKeyboard() {
+        super.DismissKeyboard()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(animated : Bool) {
+        super.viewWillDisappear(animated)
+        if (self.isMovingFromParentViewController()){
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+    }
+    
+    @IBAction func AllSet(sender: UIButton) {
+        DismissKeyboard()
+        if(fName.text.isEmpty || lName.text.isEmpty || email.text.isEmpty || password.text.isEmpty || valPass.text.isEmpty) {
+            PopUp("Empty Fields", image: nil, msg: "You left something empty!", animate: true)
+        }
+        else if(password.text != valPass.text)
+        {
+            PopUp("Mis-matching Pass", image: nil, msg: "You have mis-matching passwords!", animate: true)
+        }
+        else if(email.text.rangeOfString(".") == nil || email.text.rangeOfString("@") == nil)
+        {
+            PopUp("E-Mail Error", image: nil, msg: "E-Mail is not in the proper format!", animate: true)
+        }
+        else
+        {
+            //All's good
+            var user = PFUser()
+            user.username = email.text
+            user.email = email.text
+            user.password = password.text
+            user["fName"] = fName.text
+            user["lName"] = lName.text
+            
+            user.signUpInBackgroundWithBlock {
+                (succeeded: Bool, error: NSError?) -> Void in
+                if let error = error {
+                    let errorString = error.userInfo?["error"] as? String
+                    self.PopUp("Sign Up Error", image: nil, msg: errorString!, animate: true)
+                    println(errorString!)
+                }
+                else {
+                    self.PopUp("Sign Up Complete", image: nil, msg: "Sign Up Complete!\nE-Mail verification sent.", animate: true)
+                    //Log user in
+                    
+                    //Redirect to Household page
+                }
+            }
+        }
+    }
+    
+}

@@ -29,6 +29,10 @@ import QuartzCore
         self.popUpView.layer.cornerRadius = 5
         self.popUpView.layer.shadowOpacity = 0.8
         self.popUpView.layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        
+        self.popUpView.backgroundColor = UIColor.orangeColor()
+        self.popUpView.alpha = 0.95
+        self.messageLabel.textColor = UIColor.whiteColor()
     }
     
     func showInView(aView: UIView!, withImage image : UIImage!, withMessage message: String!, animated: Bool)
