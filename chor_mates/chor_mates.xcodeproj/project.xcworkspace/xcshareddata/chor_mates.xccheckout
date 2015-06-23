@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>5BD05306-BE47-446B-B140-26A0DB6E8D7D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>chor_mates</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2BD57D9A643965E54C672542E1843177698CC2FF</key>
 		<string>https://github.com/ChoreMates/ChorMates.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>chor_mates/chor_mates.xcodeproj/project.xcworkspace</string>
+	<string>chor_mates/chor_mates.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2BD57D9A643965E54C672542E1843177698CC2FF</key>
