@@ -65,13 +65,26 @@ class RegisterPage: ViewTextController {
                     println(errorString!)
                 }
                 else {
-                    self.PopUp("Sign Up Complete", image: nil, msg: "Sign Up Complete!\nE-Mail verification sent.", animate: true)
-                    //Log user in
-                    
-                    //Redirect to Household page
+                    // Log new user in automatically
+                    PFUser.logInWithUsernameInBackground(self.email.text, password: self.password.text) {
+                        (user: PFUser?, error: NSError?) -> Void in
+                        if user != nil {
+                            self.PopUp("Sign Up Complete", image: nil, msg: "Sign Up Complete!\nE-Mail verification sent.", animate: true, onCloseFunc: self.ChangeToHouseHoldPage)
+                        }
+                        else {
+                            self.PopUp("Problem Logging in", image: nil, msg: "Problem logging in. Try logging in.", animate: true, onCloseFunc: self.ChangeToLoginPage)
+                        }
+                    }
                 }
             }
         }
     }
     
+    func ChangeToHouseHoldPage() {
+        performSegueWithIdentifier("RegisterToHH", sender: nil)
+    }
+    
+    func ChangeToLoginPage() {
+        performSegueWithIdentifier("RegisterToLogin", sender: nil)
+    }
 }

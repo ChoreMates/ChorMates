@@ -30,7 +30,7 @@ class ViewTextController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func PopUp(title: String, image: UIImage?, msg: String, animate: Bool) {
+    func PopUp(title: String, image: UIImage?, msg: String, animate: Bool, onCloseFunc: ((Void)->Void)? = nil) {
         if (UIDevice.currentDevice().userInterfaceIdiom == .Pad) {
             self.popViewController = PopUpViewControllerSwift(nibName: "PopUpViewController_iPad", bundle: nil)
         }
@@ -48,7 +48,7 @@ class ViewTextController: UIViewController, UITextFieldDelegate {
             }
         }
         self.popViewController.title = title
-        self.popViewController.showInView(self.view, withImage: image, withMessage: msg, animated: animate)
+        self.popViewController.showInView(self.view, withImage: image, withMessage: msg, animated: animate, onClose: onCloseFunc)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
