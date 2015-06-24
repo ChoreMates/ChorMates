@@ -15,6 +15,8 @@ import QuartzCore
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var logoImg: UIImageView!
     
+    var execCloseFunc:((Void)->Void)?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -35,7 +37,7 @@ import QuartzCore
         self.messageLabel.textColor = UIColor.whiteColor()
     }
     
-    func showInView(aView: UIView!, withImage image : UIImage!, withMessage message: String!, animated: Bool)
+    func showInView(aView: UIView!, withImage image : UIImage!, withMessage message: String!, animated: Bool, onClose: ((Void)->Void)? = nil)
     {
         aView.addSubview(self.view)
         logoImg!.image = image
@@ -43,6 +45,10 @@ import QuartzCore
         if animated
         {
             self.showAnimate()
+        }
+        if (onClose != nil)
+        {
+            execCloseFunc = onClose
         }
     }
     
@@ -71,5 +77,10 @@ import QuartzCore
     
     @IBAction func closePopup(sender: AnyObject) {
         self.removeAnimate()
+        
+        if(execCloseFunc != nil) {
+            execCloseFunc!()
+            execCloseFunc = nil
+        }
     }
 }

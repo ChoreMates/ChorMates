@@ -9,7 +9,7 @@
         <!--Login Page-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Login Page" id="BYZ-38-t0r" customClass="LoginPage" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginPage" title="Login Page" id="BYZ-38-t0r" customClass="LoginPage" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -161,11 +161,12 @@
                         <outlet property="password" destination="H0s-eM-DGX" id="c0m-cW-tNX"/>
                         <outlet property="registerButton" destination="XOy-HO-2Pu" id="yxj-gw-kdG"/>
                         <outlet property="userName" destination="748-ut-eyp" id="QAR-5O-faN"/>
+                        <segue destination="IsU-h5-nIR" kind="show" identifier="LoginToHH" id="q0F-Kx-Wgi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="299" y="363"/>
+            <point key="canvasLocation" x="207" y="-601"/>
         </scene>
         <!--Register Page-->
         <scene sceneID="xug-Cp-pbu">
@@ -198,7 +199,7 @@
                                     <outlet property="nextField" destination="eha-Vv-k1s" id="S3O-CV-Jwe"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eha-Vv-k1s" userLabel="lName">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eha-Vv-k1s" userLabel="lName">
                                 <rect key="frame" x="24" y="178" width="544" height="58"/>
                                 <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
@@ -218,7 +219,7 @@
                                     <outlet property="nextField" destination="0xC-Ar-AUA" id="keu-rq-0MB"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0xC-Ar-AUA" userLabel="pwd">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password..." clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0xC-Ar-AUA" userLabel="pwd">
                                 <rect key="frame" x="24" y="345" width="544" height="59"/>
                                 <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
@@ -228,7 +229,7 @@
                                     <outlet property="nextField" destination="dPE-hx-Chu" id="fOC-cc-FeN"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter Password..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dPE-hx-Chu" userLabel="pwdConfirm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter Password..." clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dPE-hx-Chu" userLabel="pwdConfirm">
                                 <rect key="frame" x="24" y="419" width="544" height="59"/>
                                 <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="16"/>
@@ -293,11 +294,13 @@
                         <outlet property="lName" destination="eha-Vv-k1s" id="Z93-Wp-sQy"/>
                         <outlet property="password" destination="0xC-Ar-AUA" id="rUr-uE-gHx"/>
                         <outlet property="valPass" destination="dPE-hx-Chu" id="3bv-Db-fyC"/>
+                        <segue destination="IsU-h5-nIR" kind="show" identifier="RegisterToHH" id="6kK-k9-h1i"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="RegisterToLogin" id="awR-TR-iGA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XBb-e3-Dki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="-29"/>
+            <point key="canvasLocation" x="-525" y="307"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b0H-EL-eC4">
@@ -320,7 +323,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QdT-EP-NWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-513" y="363"/>
+            <point key="canvasLocation" x="-525" y="-601"/>
         </scene>
         <!--Forgot Password-->
         <scene sceneID="D5K-FU-cSr">
@@ -391,7 +394,202 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkm-O6-ale" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="755"/>
+            <point key="canvasLocation" x="1043" y="-601"/>
+        </scene>
+        <!--HouseHoldPage-->
+        <scene sceneID="Nam-1U-e6A">
+            <objects>
+                <viewController storyboardIdentifier="HouseHoldPage" title="Household " useStoryboardIdentifierAsRestorationIdentifier="YES" id="IsU-h5-nIR" userLabel="HouseHoldPage" customClass="HouseHoldPage" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x7c-b6-UeP"/>
+                        <viewControllerLayoutGuide type="bottom" id="CSc-mS-sBU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lVq-Db-nDe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="ZCv-Dn-sB8">
+                                <rect key="frame" x="327" y="74" width="249" height="518"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZCv-Dn-sB8" secondAttribute="height" multiplier="135:281" id="bu5-Sn-8xb"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21U-5Q-nLC">
+                                <rect key="frame" x="215" y="240" width="170" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
+                                <state key="normal" title="Join A House">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryP-DT-gfA">
+                                <rect key="frame" x="215" y="122" width="170" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="iy9-ud-9cs"/>
+                                    <constraint firstAttribute="width" constant="170" id="vQ7-gt-kRF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
+                                <state key="normal" title="Create Household">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="iFl-pn-ZiY" kind="show" id="k13-mD-ApR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.42765727799999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="21U-5Q-nLC" firstAttribute="height" secondItem="ryP-DT-gfA" secondAttribute="height" id="2O7-qy-K08"/>
+                            <constraint firstItem="21U-5Q-nLC" firstAttribute="width" secondItem="ryP-DT-gfA" secondAttribute="width" id="35Z-Vg-LOc"/>
+                            <constraint firstItem="ZCv-Dn-sB8" firstAttribute="top" secondItem="x7c-b6-UeP" secondAttribute="bottom" constant="10" id="C8i-ir-Z9l"/>
+                            <constraint firstAttribute="centerX" secondItem="21U-5Q-nLC" secondAttribute="centerX" id="Huv-48-FZ6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZCv-Dn-sB8" secondAttribute="trailing" constant="8" id="ZbW-aB-jyi"/>
+                            <constraint firstAttribute="centerX" secondItem="ryP-DT-gfA" secondAttribute="centerX" id="dtl-yj-lQw"/>
+                            <constraint firstItem="CSc-mS-sBU" firstAttribute="top" secondItem="ZCv-Dn-sB8" secondAttribute="bottom" constant="8" id="ebm-9R-EAd"/>
+                            <constraint firstItem="ryP-DT-gfA" firstAttribute="top" secondItem="x7c-b6-UeP" secondAttribute="bottom" constant="58" id="kBs-SQ-Tr5"/>
+                            <constraint firstItem="21U-5Q-nLC" firstAttribute="top" secondItem="ryP-DT-gfA" secondAttribute="bottom" constant="78" id="u39-8U-0Pk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="HHToLogin" id="jHl-Ob-U8g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GNW-jI-GlD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="207" y="307"/>
+        </scene>
+        <!--CreateHouseHold-->
+        <scene sceneID="4rd-hc-lqF">
+            <objects>
+                <viewController title="CreateHouseHold" id="iFl-pn-ZiY" customClass="CreateHouseHoldPage" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fzv-Op-U9s"/>
+                        <viewControllerLayoutGuide type="bottom" id="suF-vG-RKe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Nt8-jH-mD2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="bgr-fp-dFw">
+                                <rect key="frame" x="327" y="74" width="249" height="518"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bgr-fp-dFw" secondAttribute="height" multiplier="135:281" id="dES-cZ-vKp"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Household Name..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dL5-LR-tTi">
+                                <rect key="frame" x="24" y="89" width="552" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dL5-LR-tTi" secondAttribute="height" multiplier="139:15" id="HjS-fo-dYv"/>
+                                </constraints>
+                                <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iFl-pn-ZiY" id="1Ij-JY-h2X"/>
+                                    <outlet property="nextField" destination="EBJ-sV-mKI" id="N2f-u1-y2q"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EBJ-sV-mKI">
+                                <rect key="frame" x="24" y="159" width="552" height="59"/>
+                                <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iFl-pn-ZiY" id="hET-gE-1GH"/>
+                                    <outlet property="nextField" destination="zbL-n5-RRw" id="Z6j-fe-BYn"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Apt, Suite, etc. (Optional)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbL-n5-RRw">
+                                <rect key="frame" x="24" y="228" width="552" height="60"/>
+                                <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="go"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iFl-pn-ZiY" id="ZI2-pb-eZz"/>
+                                    <outlet property="returnKey" destination="YF6-a4-Ys6" id="59y-Oa-ha6"/>
+                                </connections>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51v-B4-puC" userLabel="Container">
+                                <rect key="frame" x="205" y="293" width="190" height="70"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Foj-AH-exx" userLabel="Privacy">
+                                        <rect key="frame" x="2" y="19" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.57272820723684215" green="0.14525082236842105" blue="0.53284333881578949" alpha="1" colorSpace="calibratedRGB"/>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private House?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9w-CL-t5z">
+                                        <rect key="frame" x="68" y="17" width="120" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="3k7-cS-QUS"/>
+                                            <constraint firstAttribute="width" constant="120" id="rr2-E0-p2X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                        <color key="textColor" red="0.62302117599999995" green="0.25506270559999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="C9w-CL-t5z" secondAttribute="centerY" id="8KB-zJ-MK9"/>
+                                    <constraint firstAttribute="centerY" secondItem="Foj-AH-exx" secondAttribute="centerY" id="9wH-5L-PIo"/>
+                                    <constraint firstItem="Foj-AH-exx" firstAttribute="leading" secondItem="51v-B4-puC" secondAttribute="leading" constant="2" id="Fdd-nh-Yf3"/>
+                                    <constraint firstAttribute="width" constant="190" id="InZ-hq-8nG"/>
+                                    <constraint firstAttribute="trailing" secondItem="C9w-CL-t5z" secondAttribute="trailing" constant="2" id="lg5-8f-WgT"/>
+                                    <constraint firstAttribute="height" constant="70" id="q7S-K0-xQk"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF6-a4-Ys6">
+                                <rect key="frame" x="220" y="373" width="160" height="42"/>
+                                <color key="backgroundColor" red="0.57272820723684215" green="0.14525082236842105" blue="0.53284333881578949" alpha="0.75" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="i7q-RM-bvn"/>
+                                    <constraint firstAttribute="width" constant="160" id="sG6-gs-whh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                <state key="normal" title="Home Sweet Home!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="HomeSweetHome:" destination="iFl-pn-ZiY" eventType="touchUpInside" id="RIe-qi-djj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.42765727799999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="width" secondItem="EBJ-sV-mKI" secondAttribute="width" id="0VH-XC-kZY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dL5-LR-tTi" secondAttribute="trailing" constant="8" id="151-f4-1TD"/>
+                            <constraint firstAttribute="centerX" secondItem="YF6-a4-Ys6" secondAttribute="centerX" id="2Yt-8u-dtJ"/>
+                            <constraint firstItem="zbL-n5-RRw" firstAttribute="top" secondItem="EBJ-sV-mKI" secondAttribute="bottom" constant="10" id="52p-gB-fE6"/>
+                            <constraint firstItem="bgr-fp-dFw" firstAttribute="top" secondItem="fzv-Op-U9s" secondAttribute="bottom" constant="10" id="6Xx-cm-kHp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bgr-fp-dFw" secondAttribute="trailing" constant="8" id="8Fg-eD-Mvr"/>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="top" secondItem="fzv-Op-U9s" secondAttribute="bottom" constant="25" id="9Yh-UM-slA"/>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="height" secondItem="EBJ-sV-mKI" secondAttribute="height" id="BVB-Vq-AUs"/>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="height" secondItem="zbL-n5-RRw" secondAttribute="height" id="D11-6P-ZRz"/>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="width" secondItem="zbL-n5-RRw" secondAttribute="width" id="GEv-BS-cFP"/>
+                            <constraint firstAttribute="centerX" secondItem="51v-B4-puC" secondAttribute="centerX" id="GQa-bx-FhQ"/>
+                            <constraint firstItem="EBJ-sV-mKI" firstAttribute="leading" secondItem="Nt8-jH-mD2" secondAttribute="leadingMargin" constant="8" id="UDQ-8a-BQ7"/>
+                            <constraint firstItem="zbL-n5-RRw" firstAttribute="leading" secondItem="Nt8-jH-mD2" secondAttribute="leadingMargin" constant="8" id="Yar-CW-dBM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EBJ-sV-mKI" secondAttribute="trailing" constant="8" id="aAp-dZ-YfU"/>
+                            <constraint firstItem="51v-B4-puC" firstAttribute="top" secondItem="zbL-n5-RRw" secondAttribute="bottom" constant="5" id="imL-RL-fI8"/>
+                            <constraint firstItem="EBJ-sV-mKI" firstAttribute="top" secondItem="dL5-LR-tTi" secondAttribute="bottom" constant="10" id="ld8-zB-47t"/>
+                            <constraint firstItem="YF6-a4-Ys6" firstAttribute="top" secondItem="51v-B4-puC" secondAttribute="bottom" constant="10" id="q11-mp-5Th"/>
+                            <constraint firstItem="suF-vG-RKe" firstAttribute="top" secondItem="bgr-fp-dFw" secondAttribute="bottom" constant="8" id="wlA-ax-zeP"/>
+                            <constraint firstItem="dL5-LR-tTi" firstAttribute="leading" secondItem="Nt8-jH-mD2" secondAttribute="leadingMargin" constant="8" id="xr4-aw-Adc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zbL-n5-RRw" secondAttribute="trailing" constant="8" id="zhp-dW-jda"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create Household" id="YXD-RL-0LJ"/>
+                    <connections>
+                        <outlet property="address1" destination="EBJ-sV-mKI" id="fje-Lw-xtK"/>
+                        <outlet property="address2" destination="zbL-n5-RRw" id="a90-p6-61O"/>
+                        <outlet property="householdName" destination="dL5-LR-tTi" id="pbD-9R-LyO"/>
+                        <outlet property="privacy" destination="Foj-AH-exx" id="aC0-24-kFo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLO-pb-7aK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1043" y="307"/>
         </scene>
         <!--My Chores-->
         <scene sceneID="9Z6-K2-xYf">
@@ -579,4 +777,8 @@
     <resources>
         <image name="mop" width="400" height="637"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="6kK-k9-h1i"/>
+        <segue reference="awR-TR-iGA"/>
+    </inferredMetricsTieBreakers>
 </document>

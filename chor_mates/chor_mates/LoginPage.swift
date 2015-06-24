@@ -22,9 +22,10 @@ class LoginPage: ViewTextController {
         super.viewDidLoad()
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
         var currentUser = PFUser.currentUser()
-        if(currentUser != nil){
-          println("Welcome back, \(currentUser?.username)!")
+        if(currentUser != nil) {
+            HasHousehold(currentUser, msg: "Welcome back, \(currentUser!.username!)!")
         }
     }
 
@@ -42,15 +43,50 @@ class LoginPage: ViewTextController {
             PFUser.logInWithUsernameInBackground(userName.text, password:password.text) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
-                    self.PopUp("Successful Login", image: nil, msg: "Sucessful Login! Welcome, \(user!.username!)!", animate: true)
-                    //Pop up needs to be replaced with redirect to either home page, or create/join household
+                    self.HasHousehold(user, msg: "Sucessful Login! Welcome back!")
                 }
                 else {
                     self.PopUp("Invalid Login", image: nil, msg: "Invalid username or password! Forgot?", animate: true)
                 }
             }
+        }
+    }
+    
+    // Function queries DB to see if logged in user is registered with a household.
+    // If not, then redirect to household page, if so, redirect to home page
+    func HasHousehold(user: PFUser?, msg: String)
+    {
+        if(user != nil) {
+            var query = PFQuery(className: "Household_User")
+            query.whereKey("userID", equalTo: user!)
+            
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    var redirectHome = (objects!.count == 0) ? false : true
+                    self.RedirectTo(redirectHome, msg: msg)
+                }
+                else {
+                    // Log details of the failure
+                    println("Error: \(error!) \(error!.userInfo!)")
+                }
+            }
+        }
+    }
+    
+    func RedirectTo(redirectHome: Bool, msg: String) {
+        if(!redirectHome) {
+          PopUp("Successful Login", image: nil, msg: msg, animate: true, onCloseFunc: ChangeToHouseHoldPage)
+        }
+        else {
+            //Go to home page
+            //Temp: log out since no home page
             PFUser.logOut()
         }
+    }
+    
+    func ChangeToHouseHoldPage() {
+        performSegueWithIdentifier("LoginToHH", sender: nil)
     }
     
     @IBAction func Register(sender: UIButton) {
