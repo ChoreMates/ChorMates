@@ -69,7 +69,7 @@ class CreateHouseHoldPage: ViewTextController {
                     houseUser.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
-                            self.PopUp("Household Created", image: nil, msg: "You're household has been created!", animate: true)
+                            self.PopUp("Household Created", image: nil, msg: "You're household has been created!", animate: true,  onCloseFunc: self.RedirectHomePage)
                             //Redirect to home page
                         }
                         else {
@@ -84,5 +84,10 @@ class CreateHouseHoldPage: ViewTextController {
                 }
             }
         }
+    }
+    
+    func RedirectHomePage() {
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("MyChoresPage") as! UITableViewController
+        presentViewController(controller, animated: true, completion: nil)
     }
 }
