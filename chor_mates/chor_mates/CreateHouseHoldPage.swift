@@ -23,6 +23,8 @@ class CreateHouseHoldPage: ViewTextController {
         logoutButton.tintColor = UIColor.whiteColor()
         //logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Noteworthy", size: 20)!], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItem = logoutButton
+        
+        //Check if request, if yes make sure if want to continue. If yes, send email to household owner saying no more request, remove from table his request
     }
     
     override func DismissKeyboard() {
