@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -166,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="207" y="-601"/>
+            <point key="canvasLocation" x="567" y="347"/>
         </scene>
         <!--Register Page-->
         <scene sceneID="xug-Cp-pbu">
@@ -300,7 +300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XBb-e3-Dki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-525" y="307"/>
+            <point key="canvasLocation" x="1283" y="-509"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b0H-EL-eC4">
@@ -323,7 +323,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QdT-EP-NWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-525" y="-601"/>
+            <point key="canvasLocation" x="567" y="-525"/>
         </scene>
         <!--Forgot Password-->
         <scene sceneID="D5K-FU-cSr">
@@ -337,13 +337,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="QzA-cV-UUo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="QzA-cV-UUo">
                                 <rect key="frame" x="327" y="74" width="249" height="518"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QzA-cV-UUo" secondAttribute="height" multiplier="135:281" id="GB5-aE-sly"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="esq-JY-XEG" userLabel="email">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="esq-JY-XEG" userLabel="email">
                                 <rect key="frame" x="24" y="114" width="552" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="esq-JY-XEG" secondAttribute="height" multiplier="139:15" constant="-4" id="KZV-Gm-MNG"/>
@@ -356,7 +356,7 @@
                                     <outlet property="returnKey" destination="HYY-gS-45I" id="Vkn-iZ-T4Y"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYY-gS-45I">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYY-gS-45I">
                                 <rect key="frame" x="235" y="224" width="130" height="41"/>
                                 <color key="backgroundColor" red="0.4628477933447368" green="0.91684696292368417" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -394,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkm-O6-ale" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1043" y="-601"/>
+            <point key="canvasLocation" x="1431" y="347"/>
         </scene>
         <!--HouseHoldPage-->
         <scene sceneID="Nam-1U-e6A">
@@ -461,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GNW-jI-GlD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="207" y="307"/>
+            <point key="canvasLocation" x="-953" y="239"/>
         </scene>
         <!--JoinHouseHoldPage-->
         <scene sceneID="vs8-ld-ntH">
@@ -475,13 +475,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-G4-IFf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mop" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-G4-IFf">
                                 <rect key="frame" x="343" y="74" width="249" height="518"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZMi-G4-IFf" secondAttribute="height" multiplier="135:281" id="uky-lh-1AH"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MOh-0d-cvQ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MOh-0d-cvQ">
                                 <rect key="frame" x="17" y="167" width="566" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MOh-0d-cvQ" secondAttribute="height" multiplier="139:15" id="Ift-LW-AVp"/>
@@ -494,7 +494,7 @@
                                     <outlet property="returnKey" destination="GQu-y1-AaR" id="KGb-Jk-Zct"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQu-y1-AaR">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQu-y1-AaR">
                                 <rect key="frame" x="248" y="278" width="105" height="42"/>
                                 <color key="backgroundColor" red="0.57272820719999995" green="0.14525082240000001" blue="0.53284333880000001" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -526,11 +526,12 @@
                     <navigationItem key="navigationItem" title="Join A Household" id="Y0L-3c-LjW"/>
                     <connections>
                         <outlet property="email" destination="MOh-0d-cvQ" id="A2J-Mi-tl2"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="JoinToLogin" id="Odt-eh-47P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zez-wL-Fpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="207" y="1151"/>
+            <point key="canvasLocation" x="-145" y="983"/>
         </scene>
         <!--CreateHouseHold-->
         <scene sceneID="4rd-hc-lqF">
@@ -657,11 +658,12 @@
                         <outlet property="address2" destination="zbL-n5-RRw" id="a90-p6-61O"/>
                         <outlet property="householdName" destination="dL5-LR-tTi" id="pbD-9R-LyO"/>
                         <outlet property="privacy" destination="Foj-AH-exx" id="aC0-24-kFo"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="CreateToLogin" id="azb-lN-SaM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLO-pb-7aK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1043" y="307"/>
+            <point key="canvasLocation" x="-245" y="-509"/>
         </scene>
         <!--My Chores-->
         <scene sceneID="9Z6-K2-xYf">
@@ -850,7 +852,7 @@
         <image name="mop" width="400" height="637"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="awR-TR-iGA"/>
+        <segue reference="SjV-bw-CjQ"/>
         <segue reference="6kK-k9-h1i"/>
     </inferredMetricsTieBreakers>
 </document>

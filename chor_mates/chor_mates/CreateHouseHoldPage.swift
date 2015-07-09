@@ -24,7 +24,8 @@ class CreateHouseHoldPage: ViewTextController {
         //logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Noteworthy", size: 20)!], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItem = logoutButton
         
-        //Check if request, if yes make sure if want to continue. If yes, send email to household owner saying no more request, remove from table his request
+        // Check if previously requested, if yes make sure if want to continue.
+        // If yes, send email to household owner saying no more request, remove request from the table
     }
     
     override func DismissKeyboard() {
@@ -34,7 +35,7 @@ class CreateHouseHoldPage: ViewTextController {
     
     func LogOut() {
         PFUser.logOut()
-        performSegueWithIdentifier("HHToLogin", sender: nil)
+        performSegueWithIdentifier("CreateToLogin", sender: nil)
     }
     
     @IBAction func HomeSweetHome(sender: UIButton) {
@@ -46,15 +47,6 @@ class CreateHouseHoldPage: ViewTextController {
             var address: String = address1.text
             if(!address2.text.isEmpty) {
                 address += ", \(address2.text)"
-            }
-            
-            println(householdName.text)
-            println(address)
-            if(privacy.on) {
-                println("It's on!")
-            }
-            else {
-                println("It's off!")
             }
         
             var household = PFObject(className: "Household")
@@ -75,20 +67,27 @@ class CreateHouseHoldPage: ViewTextController {
                             //Redirect to home page
                         }
                         else {
-                            println("Problem, Uh-oh!!")
-                            //if problem reaches here, delete household and tell user to retry
+                            household.deleteInBackgroundWithBlock {
+                                (success: Bool, error: NSError?) -> Void in
+                                if (!success) {
+                                    println("Delete failed? \(error!.description)")
+                                    //Assuming the connection loss is the cause of the failure
+                                    household.deleteEventually()
+                                }
+                                self.PopUp("Household Not Created", image: nil, msg: "The household could not be created!\nPlease try again.", animate: true,  onCloseFunc: nil)
+                            }
                         }
                     }
                 }
                 else {
-                    println("Problem!!")
-                    //retry creating the household
+                    self.PopUp("Household Not Created", image: nil, msg: "The household could not be created!\nPlease try again.", animate: true,  onCloseFunc: nil)
                 }
             }
         }
     }
     
     func RedirectHomePage() {
+        PFUser.logOut() //Temp! Only until tab view is working
         let controller = storyboard?.instantiateViewControllerWithIdentifier("MyChoresPage") as! UITableViewController
         presentViewController(controller, animated: true, completion: nil)
     }
