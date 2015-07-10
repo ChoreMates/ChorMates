@@ -57,7 +57,6 @@
 		040BA8971B38F1830057A16A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		040BA89D1B38F2040057A16A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		040BA89F1B38F25A0057A16A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		0AF334A41B3E21E9006ABC7C /* Expenses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expenses.swift; sourceTree = "<group>"; };
 		0AF9BA121B0187D200093132 /* chor_mates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chor_mates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF9BA161B0187D300093132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AF9BA171B0187D300093132 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -492,7 +491,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/parse-osx-library-1",
 				);
 				INFOPLIST_FILE = chor_mates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -511,7 +509,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/parse-osx-library-1",
 				);
 				INFOPLIST_FILE = chor_mates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
