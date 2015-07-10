@@ -28,6 +28,7 @@
 		4A7D28EE1B3761E000D9B5C7 /* PopUpViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7D28E91B3761E000D9B5C7 /* PopUpViewControllerSwift.swift */; };
 		4A7D28F01B3761FD00D9B5C7 /* PopUpViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7D28EF1B3761FD00D9B5C7 /* PopUpViewController_iPad.xib */; };
 		4A7D28F31B379A9800D9B5C7 /* ForgotPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7D28F21B379A9800D9B5C7 /* ForgotPage.swift */; };
+		4A9A48861B47320F0098BD03 /* JoinHouseholdPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */; };
 		4AC6B4271B12B7A5008A46EC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4101B12B5F500AC8FA6 /* AudioToolbox.framework */; };
 		4AC6B4281B12B7A5008A46EC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4111B12B5F500AC8FA6 /* CFNetwork.framework */; };
 		4AC6B4291B12B7A5008A46EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4121B12B5F500AC8FA6 /* CoreGraphics.framework */; };
@@ -88,6 +89,7 @@
 		4A92F4181B12B5F500AC8FA6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A92F4191B12B5F500AC8FA6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinHouseholdPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,16 +148,11 @@
 			children = (
 				4A7D28E11B37613400D9B5C7 /* NMPopUpViewController */,
 				0AF9BA151B0187D200093132 /* Supporting Files */,
+				4A9A48841B472FD80098BD03 /* Login/Register */,
 				0AF9BA171B0187D300093132 /* AppDelegate.swift */,
-				0AF9BA191B0187D300093132 /* LoginPage.swift */,
-				0AF334A41B3E21E9006ABC7C /* Expenses.swift */,
 				0AF9BA1B1B0187D300093132 /* Main.storyboard */,
 				0AF9BA1E1B0187D300093132 /* Images.xcassets */,
 				0AF9BA201B0187D300093132 /* LaunchScreen.xib */,
-				4A6810451B36214600A78BF6 /* RegisterPage.swift */,
-				4A7D28F21B379A9800D9B5C7 /* ForgotPage.swift */,
-				4A4DDF721B38F742000132E9 /* HouseHoldPage.swift */,
-				4A4DDF741B3A4551000132E9 /* CreateHouseHoldPage.swift */,
 				4A6810491B37276000A78BF6 /* ViewTextController.swift */,
 				040BA8901B38F1040057A16A /* ChorematesViewController.swift */,
 			);
@@ -213,6 +210,19 @@
 				4A7D28E51B3761E000D9B5C7 /* PopUpViewController_iPhone6Plus.xib */,
 			);
 			name = iPhone6;
+			sourceTree = "<group>";
+		};
+		4A9A48841B472FD80098BD03 /* Login/Register */ = {
+			isa = PBXGroup;
+			children = (
+				0AF9BA191B0187D300093132 /* LoginPage.swift */,
+				4A6810451B36214600A78BF6 /* RegisterPage.swift */,
+				4A7D28F21B379A9800D9B5C7 /* ForgotPage.swift */,
+				4A4DDF721B38F742000132E9 /* HouseHoldPage.swift */,
+				4A4DDF741B3A4551000132E9 /* CreateHouseHoldPage.swift */,
+				4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */,
+			);
+			name = Login/Register;
 			sourceTree = "<group>";
 		};
 		4AC6B4241B12B765008A46EC /* Frameworks */ = {
@@ -347,6 +357,7 @@
 				0AF9BA1A1B0187D300093132 /* LoginPage.swift in Sources */,
 				0AF9BA181B0187D300093132 /* AppDelegate.swift in Sources */,
 				4A68104A1B37276000A78BF6 /* ViewTextController.swift in Sources */,
+				4A9A48861B47320F0098BD03 /* JoinHouseholdPage.swift in Sources */,
 				4A4DDF731B38F742000132E9 /* HouseHoldPage.swift in Sources */,
 				4A7D28EE1B3761E000D9B5C7 /* PopUpViewControllerSwift.swift in Sources */,
 				4A4DDF751B3A4551000132E9 /* CreateHouseHoldPage.swift in Sources */,
