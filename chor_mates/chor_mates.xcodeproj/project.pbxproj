@@ -11,7 +11,6 @@
 		040BA8981B38F1830057A16A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BA8971B38F1830057A16A /* ParseUI.framework */; };
 		040BA89E1B38F2040057A16A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BA89D1B38F2040057A16A /* Parse.framework */; };
 		040BA8A01B38F25A0057A16A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040BA89F1B38F25A0057A16A /* Bolts.framework */; };
-		0AF334A51B3E21E9006ABC7C /* Expenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF334A41B3E21E9006ABC7C /* Expenses.swift */; };
 		0AF9BA181B0187D300093132 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9BA171B0187D300093132 /* AppDelegate.swift */; };
 		0AF9BA1A1B0187D300093132 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9BA191B0187D300093132 /* LoginPage.swift */; };
 		0AF9BA1D1B0187D300093132 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9BA1B1B0187D300093132 /* Main.storyboard */; };
@@ -354,7 +353,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9A63541B4F709C0031E612 /* Expenses.swift in Sources */,
-				0AF334A51B3E21E9006ABC7C /* Expenses.swift in Sources */,
 				4A6810461B36214600A78BF6 /* RegisterPage.swift in Sources */,
 				4A7D28F31B379A9800D9B5C7 /* ForgotPage.swift in Sources */,
 				040BA8911B38F1040057A16A /* ChorematesViewController.swift in Sources */,
