@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  chor_mates
 //
-//  Created by kosta on 5/11/15.
+//  Created by Kostaq Papa on 5/11/15.
 //  Copyright (c) 2015 ChorMates. All rights reserved.
 //
 

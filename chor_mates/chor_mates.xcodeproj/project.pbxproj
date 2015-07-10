@@ -28,6 +28,7 @@
 		4A7D28F01B3761FD00D9B5C7 /* PopUpViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7D28EF1B3761FD00D9B5C7 /* PopUpViewController_iPad.xib */; };
 		4A7D28F31B379A9800D9B5C7 /* ForgotPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7D28F21B379A9800D9B5C7 /* ForgotPage.swift */; };
 		4A9A48861B47320F0098BD03 /* JoinHouseholdPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */; };
+		4A9A63541B4F709C0031E612 /* Expenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A63531B4F709C0031E612 /* Expenses.swift */; };
 		4AC6B4271B12B7A5008A46EC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4101B12B5F500AC8FA6 /* AudioToolbox.framework */; };
 		4AC6B4281B12B7A5008A46EC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4111B12B5F500AC8FA6 /* CFNetwork.framework */; };
 		4AC6B4291B12B7A5008A46EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4121B12B5F500AC8FA6 /* CoreGraphics.framework */; };
@@ -88,6 +89,7 @@
 		4A92F4191B12B5F500AC8FA6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinHouseholdPage.swift; sourceTree = "<group>"; };
+		4A9A63531B4F709C0031E612 /* Expenses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expenses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				0AF9BA1B1B0187D300093132 /* Main.storyboard */,
 				0AF9BA1E1B0187D300093132 /* Images.xcassets */,
 				0AF9BA201B0187D300093132 /* LaunchScreen.xib */,
+				4A9A63531B4F709C0031E612 /* Expenses.swift */,
 				4A6810491B37276000A78BF6 /* ViewTextController.swift */,
 				040BA8901B38F1040057A16A /* ChorematesViewController.swift */,
 			);
@@ -348,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9A63541B4F709C0031E612 /* Expenses.swift in Sources */,
 				4A6810461B36214600A78BF6 /* RegisterPage.swift in Sources */,
 				4A7D28F31B379A9800D9B5C7 /* ForgotPage.swift in Sources */,
 				040BA8911B38F1040057A16A /* ChorematesViewController.swift in Sources */,

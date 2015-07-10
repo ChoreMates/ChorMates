@@ -665,6 +665,76 @@
             </objects>
             <point key="canvasLocation" x="-245" y="-509"/>
         </scene>
+        <!--Expenses-->
+        <scene sceneID="Yr8-XG-laL">
+            <objects>
+                <viewController title="Expenses" id="dj4-Sx-lUf" customClass="Expenses" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Imy-Fr-QMv"/>
+                        <viewControllerLayoutGuide type="bottom" id="mYZ-ge-SV9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D3Z-b7-pCJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hcw-Al-mpS">
+                                <rect key="frame" x="0.0" y="20" width="600" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="qQf-29-CLu"/>
+                                    <constraint firstAttribute="height" constant="28" id="uab-2f-S0F"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Previous Payments"/>
+                                    <segment title="Current Payments"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="U9g-Q9-BKZ">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lX-dK-Lte">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="0tA-t9-Cfr"/>
+                                    <constraint firstAttribute="width" constant="600" id="aUx-y7-llb"/>
+                                </constraints>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="RNP-Wj-AdR"/>
+                                    <tabBarItem systemItem="more" id="CwX-LU-89e"/>
+                                </items>
+                                <color key="barTintColor" red="0.66616152979999999" green="0.85334578800000005" blue="0.39837925819999997" alpha="0.75" colorSpace="calibratedRGB"/>
+                            </tabBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4RM-eH-3Yj">
+                                <rect key="frame" x="0.0" y="56" width="600" height="495"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="495" id="BO5-tV-txw"/>
+                                    <constraint firstAttribute="width" constant="600" id="yfv-5e-eof"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.42765727799999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hcw-Al-mpS" secondAttribute="trailing" constant="-16" id="0nq-KM-LAI"/>
+                            <constraint firstItem="Hcw-Al-mpS" firstAttribute="top" secondItem="Imy-Fr-QMv" secondAttribute="bottom" id="GGG-Uy-QH5"/>
+                            <constraint firstItem="4RM-eH-3Yj" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="TW5-8y-haX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4RM-eH-3Yj" secondAttribute="trailing" constant="-16" id="izC-FS-tx5"/>
+                            <constraint firstItem="7lX-dK-Lte" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="k51-g1-y7w"/>
+                            <constraint firstItem="4RM-eH-3Yj" firstAttribute="top" secondItem="Hcw-Al-mpS" secondAttribute="bottom" constant="8" id="mUw-Ll-2ir"/>
+                            <constraint firstItem="Hcw-Al-mpS" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="oxo-ey-5x4"/>
+                            <constraint firstItem="Hcw-Al-mpS" firstAttribute="top" secondItem="Imy-Fr-QMv" secondAttribute="bottom" id="pZz-ia-baY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7lX-dK-Lte" secondAttribute="trailing" constant="-16" id="qZ0-0h-7p0"/>
+                            <constraint firstItem="mYZ-ge-SV9" firstAttribute="top" secondItem="7lX-dK-Lte" secondAttribute="bottom" id="wl5-Tc-CTP"/>
+                            <constraint firstItem="7lX-dK-Lte" firstAttribute="top" secondItem="4RM-eH-3Yj" secondAttribute="bottom" id="y8e-zd-HH0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentPayments" destination="Hcw-Al-mpS" id="s5i-Ft-M8p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhZ-8X-AUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3374" y="59"/>
+        </scene>
         <!--My Chores-->
         <scene sceneID="9Z6-K2-xYf">
             <objects>

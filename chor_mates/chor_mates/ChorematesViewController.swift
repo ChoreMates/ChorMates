@@ -27,6 +27,9 @@ class TableViewController: PFQueryTableViewController {
     }
     
     //override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+
+    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! PFTableViewCell!
@@ -50,4 +53,7 @@ class TableViewController: PFQueryTableViewController {
         
         return cell
     }
+}
+
+*/
 }
