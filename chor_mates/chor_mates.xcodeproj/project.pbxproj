@@ -487,7 +487,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/parse-osx-library-1",
 				);
 				INFOPLIST_FILE = chor_mates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -506,7 +505,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/parse-osx-library-1",
 				);
 				INFOPLIST_FILE = chor_mates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
