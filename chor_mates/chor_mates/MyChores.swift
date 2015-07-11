@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import ParseUI
 class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var inventoryItems = [String]()
     var choreNameToSwap : String!
     var refreshControl = UIRefreshControl()
@@ -47,10 +47,13 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if error == nil
             {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) chores.")
+                println("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
                 if let objects = objects as? [PFObject]
                 {
+                    self.choreObjectCurrent.removeAll(keepCapacity: false)
+                    
+                    self.choreObjectFuture.removeAll(keepCapacity: false)
                     for object: PFObject in objects
                     {
                         var dateCreated = object["endDate"] as! NSDate?
@@ -81,17 +84,15 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 println("Error: \(error!) \(error!.userInfo!)")
             }
         }
-        dispatch_async(dispatch_get_main_queue()){
-            self.choreTableView.reloadData();
-        };
-
-    
+        
+        
+        
     }
     override func viewDidAppear(animated: Bool) {
         
         choreTableView.reloadData()
     }
-
+    
     override func viewDidLoad() {
         
         self.navigationItem.title = "My Chores"
@@ -111,14 +112,15 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
         self.choreTableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
-
+        
         //hide empty table rows
         var tblView =  UIView(frame: CGRectZero)
         choreTableView.tableFooterView = tblView
         choreTableView.tableFooterView!.hidden = true
         choreTableView.backgroundColor = UIColor.clearColor()
-       
+        
         retrieveObjectsFromParse()
+        
     }
     
     func refreshTableView(sender:AnyObject)
@@ -155,13 +157,13 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if(indexPath.section == 0)
             {
                 if let pointer = self.choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
-                   self.choreNameToSwap = pointer["choreName"] as! String!
+                    self.choreNameToSwap = pointer["choreName"] as! String!
                     
                 }
                 if let pointer = self.choreObjectCurrent[indexPath.row]["userID"] as? PFObject {
                     self.currentUserID = pointer.objectId
                 }
-
+                
                 self.performSegueWithIdentifier("toRequest", sender: self.choreObjectCurrent[indexPath.row])
             }
             else{
@@ -174,7 +176,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 self.performSegueWithIdentifier("toRequest", sender: self.choreObjectFuture[indexPath.row])
             }
-
+            
         })
         //expense action
         var expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -185,97 +187,97 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             else{
                 
-             self.performSegueWithIdentifier("toExpense", sender: self.choreObjectFuture[indexPath.row])
+                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectFuture[indexPath.row])
             }
             
             
-           
+            
         })
         //done chore action
         var doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
             let doneMenu = UIAlertController(title: nil, message: "Confirm Completion", preferredStyle: .Alert)
-          
+            
             let appRateAction = UIAlertAction(title: "Completed", style: UIAlertActionStyle.Default)
-            { action -> Void in
-                if(indexPath.section == 0)
-                {
-                    
-                    
-                    currChore["status"] = "completed"
-                    currChore["completedDate"] = NSDate()
-                    currChore.saveInBackgroundWithBlock {
-                        (success: Bool, error: NSError?) -> Void in
-                        if (success) {
-                            println("The object has been saved.")
-                        } else {
-                            // There was a problem, check error.description
+                { action -> Void in
+                    if(indexPath.section == 0)
+                    {
+                        
+                        
+                        currChore["status"] = "completed"
+                        currChore["completedDate"] = NSDate()
+                        currChore.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                println("The object has been saved.")
+                            } else {
+                                // There was a problem, check error.description
+                            }
                         }
+                        
                     }
-                  
-                }
-                else if(indexPath.section == 1)
-                {
-                    
-                    
-                    currChore["status"] = "completed"
-                    currChore["completedDate"] = NSDate()
-                    currChore.saveInBackgroundWithBlock {
-                        (success: Bool, error: NSError?) -> Void in
-                        if (success) {
-                            println("The object has been saved.")
-                        } else {
-                            // There was a problem, check error.description
+                    else if(indexPath.section == 1)
+                    {
+                        
+                        
+                        currChore["status"] = "completed"
+                        currChore["completedDate"] = NSDate()
+                        currChore.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                println("The object has been saved.")
+                            } else {
+                                // There was a problem, check error.description
+                            }
                         }
+                        
                     }
+                    self.choreTableView.reloadData()
+                    self.retrieveObjectsFromParse()
                     
-                }
-                self.choreTableView.reloadData()
-                self.refreshTableView(self)
-                
-
+                    
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             
             doneMenu.addAction(appRateAction)
             doneMenu.addAction(cancelAction)
             
-
+            
             
             self.presentViewController(doneMenu, animated: true, completion: nil)
         })
         requestAction.backgroundColor = UIColor(red: 0.5, green: 0.4, blue: 0.4, alpha: 1.0)
         expenseAction.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.5, alpha: 1.0)
         doneAction.backgroundColor = UIColor(red: 0.3, green: 0.4, blue: 0.2, alpha: 1.0)
-
+        
         //if the chore is still pending
         if(currChore["status"] as! String! == "pending")
         {
             return [requestAction,expenseAction,doneAction]
         }
-        //if the chore is completed
+            //if the chore is completed
         else
         {
             return [expenseAction]
         }
     }
-
+    
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
     }
-
-     func tableView(tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             //return self.choreObject.count
             //return getNumberOfRows(self.choreObject,option: 0)
             return self.choreObjectCurrent.count
         }
-       
-            //return self.choreObject.count
-            return self.choreObjectFuture.count
-
-              //  return groupList.count
+        
+        //return self.choreObject.count
+        return self.choreObjectFuture.count
+        
+        //  return groupList.count
     }
     func numberOfSectionsInTableView(tableView:UITableView) -> Int {
         
@@ -295,10 +297,10 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
-
-      
-        if( indexPath.section == 0){
         
+        
+        if( indexPath.section == 0){
+            
             var dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
             var components = NSDateComponents()
             components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
@@ -310,7 +312,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             {
                 if let pointer = choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
                     cell.choreName?.text = pointer["choreName"] as! String!
-
+                    
                 }
                 if( choreObjectCurrent[indexPath.row]["status"] as! String! == "pending")
                 {
@@ -318,7 +320,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     var dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
                     cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-            
+                    
                 }
                 else
                 {
@@ -326,22 +328,22 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     var dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
                     cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-                
+                    
                 }
-            if(choreObjectCurrent[indexPath.row]["expenseAmount"] != nil)
-            {
-                cell.choreExpense.text = choreObjectCurrent[indexPath.row]["expenseAmount"] as! String!
-            }
-            else
-            {
-                cell.choreExpense.text = "$0"
-                
-            }
+                if(choreObjectCurrent[indexPath.row]["expenseAmount"] != nil)
+                {
+                    cell.choreExpense.text = choreObjectCurrent[indexPath.row]["expenseAmount"] as! String!
+                }
+                else
+                {
+                    cell.choreExpense.text = "$0"
+                    
+                }
             }
         }
         else if(indexPath.section == 1){
-         
-                var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
+            
+            var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
             var components = NSDateComponents()
             components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
             let date: NSDate = NSDate()
@@ -350,14 +352,14 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             if dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedDescending
             {
-
-                if let pointer = choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
-                cell.choreName?.text = pointer["choreName"] as! String!
                 
+                if let pointer = choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
+                    cell.choreName?.text = pointer["choreName"] as! String!
+                    
                 }
                 
                 
-            
+                
                 if( choreObjectFuture[indexPath.row]["status"] as! String! == "pending"){
                     var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
                     var dateFormat = NSDateFormatter()
@@ -375,43 +377,43 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     
                     cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
                     
-                    }
-                    
-            
-            if(choreObjectFuture[indexPath.row]["expenseAmount"] != nil)
-            {
-                cell.choreExpense.text = choreObjectFuture[indexPath.row]["expenseAmount"] as! String!
-            }
-            else
-            {
-                cell.choreExpense.text = "$0"
-                
-            }
                 }
-        
-           
-
+                
+                
+                if(choreObjectFuture[indexPath.row]["expenseAmount"] != nil)
+                {
+                    cell.choreExpense.text = choreObjectFuture[indexPath.row]["expenseAmount"] as! String!
+                }
+                else
+                {
+                    cell.choreExpense.text = "$0"
+                    
+                }
+            }
+            
+            
+            
         }
         return cell
     }
-   
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "toExpense" {
             if let addExpenseViewController = segue.destinationViewController as? addExpense {
-                   addExpenseViewController.choreID = sender.objectId as String!
+                addExpenseViewController.choreID = sender.objectId as String!
                 
             }
         }
-            else if segue.identifier == "toRequest" {
-                if let addRequestViewController = segue.destinationViewController as? addRequest {
-                    addRequestViewController.choreSwap = sender.objectId as String!
-                                            addRequestViewController.choreSwapName  = choreNameToSwap
-                        addRequestViewController.fromPFObject = sender as! PFObject!
-                     addRequestViewController.senderUserID = currentUserID
-                }
+        else if segue.identifier == "toRequest" {
+            if let addRequestViewController = segue.destinationViewController as? addRequest {
+                addRequestViewController.choreSwap = sender.objectId as String!
+                addRequestViewController.choreSwapName  = choreNameToSwap
+                addRequestViewController.fromPFObject = sender as! PFObject!
+                addRequestViewController.senderUserID = currentUserID
             }
+        }
         
     }
-
+    
     
 }
