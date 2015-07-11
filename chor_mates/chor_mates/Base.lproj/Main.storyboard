@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XpR-Rz-z33">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -735,33 +735,6 @@
             </objects>
             <point key="canvasLocation" x="3374" y="59"/>
         </scene>
-        <!--My Chores-->
-        <scene sceneID="9Z6-K2-xYf">
-            <objects>
-                <tableViewController storyboardIdentifier="MyChoresPage" id="INO-rs-ZKA" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Pfz-zZ-zBB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hsz-6K-Oni">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hsz-6K-Oni" id="jHV-dn-YWP">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="INO-rs-ZKA" id="3J2-T3-xu9"/>
-                            <outlet property="delegate" destination="INO-rs-ZKA" id="G68-aI-ksd"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="My Chores" id="jkI-Yi-fEE"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DFa-5l-799" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2245" y="1262"/>
-        </scene>
         <!--All Chores-->
         <scene sceneID="weW-Pt-d9A">
             <objects>
@@ -868,13 +841,13 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uHe-wf-s4f">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4NQ-mb-mE3">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Thonburi-Light" family="Thonburi" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -895,27 +868,318 @@
             </objects>
             <point key="canvasLocation" x="2245" y="4163"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="PFI-VD-nSD">
+        <!--My Chores-->
+        <scene sceneID="O1V-Qc-1AN">
             <objects>
-                <tabBarController id="2Cy-qE-NHg" sceneMemberID="viewController">
+                <viewController id="L5v-5c-JlZ" customClass="MyChores" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gp9-Rs-Dwk"/>
+                        <viewControllerLayoutGuide type="bottom" id="yDd-hV-m1U"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6hI-cz-Ibq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YPM-b8-tKr">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="Cell2" rowHeight="88" id="jIY-wO-FuV" customClass="MyChoreTableCell" customModule="chor_mates" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jIY-wO-FuV" id="D3l-fW-yak">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNB-fE-Ctu">
+                                                    <rect key="frame" x="27" y="43" width="164" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opa-84-wUJ">
+                                                    <rect key="frame" x="500" y="40" width="78" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="10"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M7-Dn-6i4">
+                                                    <rect key="frame" x="500" y="25" width="78" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="10"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JNB-fE-Ctu" firstAttribute="leading" secondItem="D3l-fW-yak" secondAttribute="leadingMargin" constant="33" id="McR-F1-Tcv"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2M7-Dn-6i4" secondAttribute="trailing" constant="14" id="Tex-pA-b2Q"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="opa-84-wUJ" secondAttribute="trailing" constant="14" id="W67-fs-SCd"/>
+                                                <constraint firstAttribute="centerY" secondItem="JNB-fE-Ctu" secondAttribute="centerY" id="ikk-lv-Tc2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.93715179439999996" green="1" blue="0.874013865" alpha="0.78000000000000003" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="choreDueDate" destination="2M7-Dn-6i4" id="sgm-me-orJ"/>
+                                            <outlet property="choreExpense" destination="opa-84-wUJ" id="guU-WX-Jg1"/>
+                                            <outlet property="choreName" destination="JNB-fE-Ctu" id="hls-ET-7bi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YPM-b8-tKr" firstAttribute="leading" secondItem="6hI-cz-Ibq" secondAttribute="leadingMargin" constant="-16" id="F2D-67-9bv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YPM-b8-tKr" secondAttribute="trailing" constant="-16" id="PwW-2Y-aN3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dfe-tW-3kr"/>
+                    <connections>
+                        <outlet property="choreTableView" destination="YPM-b8-tKr" id="7xP-BI-07S"/>
+                        <segue destination="Jui-2F-QpE" kind="show" identifier="toExpense" id="J3j-6U-jD6"/>
+                        <segue destination="IDf-iB-Tzo" kind="show" identifier="toRequest" id="rfq-Yj-pzh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IsC-9y-7LJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4343" y="1126"/>
+        </scene>
+        <!--Add Expense-->
+        <scene sceneID="e3E-hf-5Gn">
+            <objects>
+                <viewController storyboardIdentifier="addExpense" id="Jui-2F-QpE" customClass="addExpense" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1E6-SG-VJc"/>
+                        <viewControllerLayoutGuide type="bottom" id="B8B-d3-lBC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7MG-Nk-TfN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRW-A7-Ob6">
+                                <rect key="frame" x="238" y="138" width="105" height="30"/>
+                                <state key="normal" title="+ Add Expense">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addExpenseButton:" destination="Jui-2F-QpE" eventType="touchUpInside" id="AM8-IT-N24"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4I-gI-c5G">
+                                <rect key="frame" x="0.0" y="65" width="600" height="62"/>
+                                <color key="backgroundColor" red="0.93621764519999995" green="0.93621764519999995" blue="0.93621764519999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="28"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="AcF-MW-7qV">
+                                <rect key="frame" x="0.0" y="179" width="600" height="415"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SupplyCell" textLabel="hZY-tv-R6o" rowHeight="53" style="IBUITableViewCellStyleDefault" id="40S-Bs-TGh">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="40S-Bs-TGh" id="Hqc-OG-MZ6">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZY-tv-R6o">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.93715179439999996" green="1" blue="0.874013865" alpha="0.78000000000000003" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="b4I-gI-c5G" secondAttribute="trailing" constant="-16" id="AIQ-TH-WEz"/>
+                            <constraint firstAttribute="centerX" secondItem="aRW-A7-Ob6" secondAttribute="centerX" id="EHn-Fo-Txf"/>
+                            <constraint firstItem="b4I-gI-c5G" firstAttribute="leading" secondItem="7MG-Nk-TfN" secondAttribute="leadingMargin" constant="-16" id="Sug-z5-2jw"/>
+                            <constraint firstItem="AcF-MW-7qV" firstAttribute="leading" secondItem="7MG-Nk-TfN" secondAttribute="leadingMargin" constant="-16" id="Tqf-qD-7me"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AcF-MW-7qV" secondAttribute="trailing" constant="-16" id="o8e-cP-efi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Expense" id="fML-WA-qMF"/>
+                    <connections>
+                        <outlet property="amountLabel" destination="b4I-gI-c5G" id="1qC-KK-z6E"/>
+                        <outlet property="suppliesTableView" destination="AcF-MW-7qV" id="O8m-fK-eb8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1mF-gB-zZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5236" y="1155"/>
+        </scene>
+        <!--Add Request-->
+        <scene sceneID="UzT-Zc-7vb">
+            <objects>
+                <viewController storyboardIdentifier="addRequest" id="IDf-iB-Tzo" customClass="addRequest" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iaQ-eU-eZQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="L2O-5j-u9B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y2w-0X-VbG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick Choremate" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZSr-JT-iG9">
+                                <rect key="frame" x="209" y="197" width="167" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Qz3-a5-kWc"/>
+                                    <constraint firstAttribute="width" constant="167" id="gxO-7G-7kV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick Chore" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHk-lZ-GM1">
+                                <rect key="frame" x="209" y="263" width="167" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="S7b-3W-pms"/>
+                                    <constraint firstAttribute="width" constant="167" id="zlD-Lm-aWG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="onPickChorePress:" destination="IDf-iB-Tzo" eventType="touchDown" id="Yda-6P-amU"/>
+                                    <segue destination="bIU-EM-zS0" kind="show" identifier="toPickChore" id="tfm-F5-M8J"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tm-zN-DsH">
+                                <rect key="frame" x="209" y="131" width="167" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="167" id="fNK-R4-G7h"/>
+                                    <constraint firstAttribute="height" constant="30" id="fTt-it-CPd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbk-sr-8qn">
+                                <rect key="frame" x="253" y="312" width="78" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="x5V-Up-2hg"/>
+                                    <constraint firstAttribute="width" constant="78" id="yIp-hC-oIZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="24"/>
+                                <state key="normal" title="Swap">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="swapPressed:" destination="IDf-iB-Tzo" eventType="touchUpInside" id="EmE-yu-Rrg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KHk-lZ-GM1" firstAttribute="top" secondItem="ZSr-JT-iG9" secondAttribute="bottom" constant="36" id="2lJ-dG-eVS"/>
+                            <constraint firstItem="ZSr-JT-iG9" firstAttribute="top" secondItem="2tm-zN-DsH" secondAttribute="bottom" constant="36" id="7ky-sJ-5hI"/>
+                            <constraint firstAttribute="centerX" secondItem="KHk-lZ-GM1" secondAttribute="centerX" constant="7.5" id="BNv-pX-ebD"/>
+                            <constraint firstAttribute="centerX" secondItem="cbk-sr-8qn" secondAttribute="centerX" constant="8" id="L4u-4u-jvo"/>
+                            <constraint firstAttribute="centerX" secondItem="ZSr-JT-iG9" secondAttribute="centerX" constant="7.5" id="Pxl-Nm-lBv"/>
+                            <constraint firstItem="2tm-zN-DsH" firstAttribute="top" secondItem="iaQ-eU-eZQ" secondAttribute="bottom" constant="67" id="WrT-ZF-Xja"/>
+                            <constraint firstAttribute="centerX" secondItem="2tm-zN-DsH" secondAttribute="centerX" constant="7.5" id="lMt-Go-RMe"/>
+                            <constraint firstItem="cbk-sr-8qn" firstAttribute="top" secondItem="KHk-lZ-GM1" secondAttribute="bottom" constant="19" id="yYY-md-NjN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chorePickedTextField" destination="KHk-lZ-GM1" id="14X-lm-F3J"/>
+                        <outlet property="choremateTextField" destination="ZSr-JT-iG9" id="hWJ-20-sfq"/>
+                        <outlet property="yourChore" destination="2tm-zN-DsH" id="zLs-6j-ReQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aKb-ug-yBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3555" y="1932"/>
+        </scene>
+        <!--Request Pick Chore-->
+        <scene sceneID="meo-gZ-Nz7">
+            <objects>
+                <tableViewController id="bIU-EM-zS0" customClass="requestPickChore" customModule="chor_mates" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="22" sectionFooterHeight="22" id="J7W-gs-9Sd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pickChoreCell" textLabel="1X4-Nc-9K7" detailTextLabel="egu-oz-aYe" rowHeight="93" style="IBUITableViewCellStyleSubtitle" id="NDO-5A-RdT" customClass="PFTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NDO-5A-RdT" id="8f3-yy-Zh6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1X4-Nc-9K7">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="23"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="egu-oz-aYe">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.93715179439999996" green="1" blue="0.874013865" alpha="0.78000000000000003" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="KIO-Ur-E7K" kind="unwind" identifier="pickedChoreUnwind" unwindAction="prepareForUnwind:" id="nMe-pU-8xz"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bIU-EM-zS0" id="4Wx-Ih-mSl"/>
+                            <outlet property="delegate" destination="bIU-EM-zS0" id="jiO-Df-NF1"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="choreSwapTableView" destination="J7W-gs-9Sd" id="iSc-bK-lew"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cxW-BJ-eFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="KIO-Ur-E7K" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4321" y="1932"/>
+        </scene>
+        <!--My Chores-->
+        <scene sceneID="tha-FF-1lp">
+            <objects>
+                <navigationController title="My Chores" automaticallyAdjustsScrollViewInsets="NO" id="wII-Kx-5vD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Chores" id="mpJ-he-wRe" userLabel="My Chores"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ySD-ol-jfl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="L5v-5c-JlZ" kind="relationship" relationship="rootViewController" id="OR9-qD-rEN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Yo-Qx-o52" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3048" y="1126"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ajg-4X-Vm6">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XpR-Rz-z33" sceneMemberID="viewController">
+                    <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" selectionIndicatorImage="mop" id="96r-ih-FcA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="p00-XI-b49">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="INO-rs-ZKA" kind="relationship" relationship="viewControllers" id="pu4-U3-YwM"/>
-                        <segue destination="czT-Gt-jl3" kind="relationship" relationship="viewControllers" id="hlf-Dq-9wG"/>
-                        <segue destination="FTw-cw-odd" kind="relationship" relationship="viewControllers" id="HCI-aL-ZPZ"/>
-                        <segue destination="6uj-yY-vyh" kind="relationship" relationship="viewControllers" id="77d-WZ-BN4"/>
-                        <segue destination="PZO-m1-Hb6" kind="relationship" relationship="viewControllers" id="QB6-JL-KtV"/>
+                        <segue destination="wII-Kx-5vD" kind="relationship" relationship="viewControllers" id="sPx-RR-0N2"/>
+                        <segue destination="czT-Gt-jl3" kind="relationship" relationship="viewControllers" id="UTW-KE-Rfb"/>
+                        <segue destination="FTw-cw-odd" kind="relationship" relationship="viewControllers" id="ogg-AY-nDd"/>
+                        <segue destination="6uj-yY-vyh" kind="relationship" relationship="viewControllers" id="gn3-Wp-ymP"/>
+                        <segue destination="PZO-m1-Hb6" kind="relationship" relationship="viewControllers" id="0ED-gM-apP"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pye-wh-Th8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6qe-DT-5MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813" y="2511"/>
+            <point key="canvasLocation" x="1172" y="1456"/>
         </scene>
     </scenes>
     <resources>

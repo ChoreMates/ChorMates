@@ -28,7 +28,7 @@ class TableViewController: PFQueryTableViewController {
     
     //override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
 
-    /*
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
@@ -53,7 +53,7 @@ class TableViewController: PFQueryTableViewController {
         
         return cell
     }
-}
 
-*/
+
+
 }
