@@ -28,7 +28,7 @@ class TableViewController: PFQueryTableViewController {
     
     //override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
 
-    /*
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
@@ -53,7 +53,13 @@ class TableViewController: PFQueryTableViewController {
         
         return cell
     }
-}
 
-*/
+    @IBAction func Logout() {
+        PFUser.logOut()
+        //Go to login page
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("NavigationController") as! UINavigationController
+        presentViewController(controller, animated: true, completion: nil)
+    }
+
+
 }
