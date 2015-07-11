@@ -47,7 +47,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if error == nil
             {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) scores.")
+                println("Successfully retrieved \(objects!.count) chores.")
                 // Do something with the found objects
                 if let objects = objects as? [PFObject]
                 {

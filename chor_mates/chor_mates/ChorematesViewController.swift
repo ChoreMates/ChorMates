@@ -54,6 +54,12 @@ class TableViewController: PFQueryTableViewController {
         return cell
     }
 
+    @IBAction func Logout() {
+        PFUser.logOut()
+        //Go to login page
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("NavigationController") as! UINavigationController
+        presentViewController(controller, animated: true, completion: nil)
+    }
 
 
 }

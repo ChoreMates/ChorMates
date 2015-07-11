@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XpR-Rz-z33">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -305,7 +305,7 @@
         <!--Navigation Controller-->
         <scene sceneID="b0H-EL-eC4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenKeyboardAppears="YES" id="bvp-bY-stP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenKeyboardAppears="YES" id="bvp-bY-stP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mth-Ew-Y66">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -832,6 +832,17 @@
                             <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="32"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ys-Ps-6OW">
+                            <rect key="frame" x="-23" y="-15" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Log Out!">
+                                <color key="titleColor" red="1" green="0.42765727799999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="Logout" destination="PZO-m1-Hb6" eventType="touchUpInside" id="nRX-rt-N0O"/>
+                            </connections>
+                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="uHe-wf-s4f" detailTextLabel="4NQ-mb-mE3" style="IBUITableViewCellStyleSubtitle" id="yUp-iz-I2M" customClass="PFTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1162,7 +1173,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ajg-4X-Vm6">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XpR-Rz-z33" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabViewController" automaticallyAdjustsScrollViewInsets="NO" id="XpR-Rz-z33" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="p00-XI-b49">
@@ -1186,7 +1197,7 @@
         <image name="mop" width="400" height="637"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="q0F-Kx-Wgi"/>
         <segue reference="SjV-bw-CjQ"/>
-        <segue reference="6kK-k9-h1i"/>
     </inferredMetricsTieBreakers>
 </document>

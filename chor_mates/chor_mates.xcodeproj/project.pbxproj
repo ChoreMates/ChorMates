@@ -178,13 +178,13 @@
 			children = (
 				4A7D28E11B37613400D9B5C7 /* NMPopUpViewController */,
 				0AF9BA151B0187D200093132 /* Supporting Files */,
-				4A9A48841B472FD80098BD03 /* Login/Register */,
 				0AF9BA171B0187D300093132 /* AppDelegate.swift */,
 				0AF9BA1B1B0187D300093132 /* Main.storyboard */,
 				0AF9BA1E1B0187D300093132 /* Images.xcassets */,
 				0AF9BA201B0187D300093132 /* LaunchScreen.xib */,
 				4A9A63531B4F709C0031E612 /* Expenses.swift */,
 				4A6810491B37276000A78BF6 /* ViewTextController.swift */,
+				4A9A48841B472FD80098BD03 /* Login/Register */,
 				0449E6341B519FD700951C4B /* RoomatesTab */,
 				045632BF1B519BDF00181F9F /* MyChoresTab */,
 			);

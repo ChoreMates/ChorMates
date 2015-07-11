@@ -63,7 +63,7 @@ class ViewTextController: UIViewController, UITextFieldDelegate {
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
     
     override func shouldAutorotate() -> Bool {

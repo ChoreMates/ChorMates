@@ -80,9 +80,7 @@ class LoginPage: ViewTextController {
         }
         else {
             //Go to home page
-            //Temp: log out since no home page
-            PFUser.logOut()
-            let controller = storyboard?.instantiateViewControllerWithIdentifier("MyChoresPage") as! UITableViewController
+            let controller = storyboard?.instantiateViewControllerWithIdentifier("TabViewController") as! UITabBarController
             presentViewController(controller, animated: true, completion: nil)
         }
     }
