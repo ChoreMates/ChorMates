@@ -185,8 +185,9 @@
 				4A9A63531B4F709C0031E612 /* Expenses.swift */,
 				4A6810491B37276000A78BF6 /* ViewTextController.swift */,
 				4A9A48841B472FD80098BD03 /* Login/Register */,
-				0449E6341B519FD700951C4B /* RoomatesTab */,
 				045632BF1B519BDF00181F9F /* MyChoresTab */,
+				4AD2F5661B52073500A59DA9 /* RequestsTab */,
+				0449E6341B519FD700951C4B /* RoomatesTab */,
 			);
 			path = chor_mates;
 			sourceTree = "<group>";
@@ -276,6 +277,13 @@
 				4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4AD2F5661B52073500A59DA9 /* RequestsTab */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = RequestsTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
