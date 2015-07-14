@@ -105,7 +105,7 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func swapPressed(sender: UIButton) {
-        if(self.choremateTextField != nil && self.chorePickedTextField != nil) { //WRONG CHECK!! of course the variables aren't nil, they point to the box on the view
+        if(!self.choremateTextField.text.isEmpty && !self.chorePickedTextField.text.isEmpty) {
             var choreRequest = PFObject(className:"Chore_Request")
             choreRequest["senderUserID"] = fromPFObject["userID"]
             choreRequest["toUserID"] = toPFObject["userID"]
@@ -116,8 +116,9 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
                     // The object has been saved.
-                } else {
-                    // There was a problem, check error.description
+                }
+                else {
+                    println(error?.description)
                 }
             }
         }

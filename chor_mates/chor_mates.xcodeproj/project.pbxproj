@@ -45,6 +45,7 @@
 		4AC6B42F1B12B7A5008A46EC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4181B12B5F500AC8FA6 /* Security.framework */; };
 		4AC6B4301B12B7A5008A46EC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4191B12B5F500AC8FA6 /* StoreKit.framework */; };
 		4AC6B4311B12B7A5008A46EC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */; };
+		4AD2F5681B548A0600A59DA9 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2F5671B548A0600A59DA9 /* Requests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinHouseholdPage.swift; sourceTree = "<group>"; };
 		4A9A63531B4F709C0031E612 /* Expenses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expenses.swift; sourceTree = "<group>"; };
+		4AD2F5671B548A0600A59DA9 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 		4AD2F5661B52073500A59DA9 /* RequestsTab */ = {
 			isa = PBXGroup;
 			children = (
+				4AD2F5671B548A0600A59DA9 /* Requests.swift */,
 			);
 			name = RequestsTab;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				0AF9BA181B0187D300093132 /* AppDelegate.swift in Sources */,
 				045632BA1B519BA800181F9F /* MyChoreTableCell.swift in Sources */,
 				4A68104A1B37276000A78BF6 /* ViewTextController.swift in Sources */,
+				4AD2F5681B548A0600A59DA9 /* Requests.swift in Sources */,
 				4A9A48861B47320F0098BD03 /* JoinHouseholdPage.swift in Sources */,
 				045632B61B519B9400181F9F /* addExpense.swift in Sources */,
 				045632BC1B519BAD00181F9F /* MyChores.swift in Sources */,
