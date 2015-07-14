@@ -30,12 +30,12 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let date: NSDate = NSDate()
         var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
         
-        var userQuery = PFQuery(className:"_User")
-        userQuery.whereKey("username", equalTo: "lol@lol.com")
+        //  var userQuery = PFQuery(className:"_User")
+        //  userQuery.whereKey("username", equalTo: "lol@lol.com")
         var query = PFQuery(className: "Chore_User")
         query.includeKey("choreID")
         query.includeKey("userID")
-        query.whereKey("userID", matchesKey: "objectId", inQuery: userQuery)
+        query.whereKey("userID", equalTo: PFUser.currentUser()!)
         query.whereKey("endDate", greaterThanOrEqualTo: expirationDate!)
         query.orderByDescending("status")
         // var choreQuery = PFQuery(className: "Chore")
@@ -90,7 +90,8 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     override func viewDidAppear(animated: Bool) {
         
-        choreTableView.reloadData()
+        self.choreTableView.reloadData()
+        retrieveObjectsFromParse()
     }
     
     override func viewDidLoad() {
@@ -103,15 +104,11 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         refreshControl.addTarget(self, action: Selector("refreshTableView:"), forControlEvents: UIControlEvents.ValueChanged)
         choreTableView.addSubview(refreshControl)
         
-        println("hi")
         
         choreTableView.delegate = self
         choreTableView.dataSource = self
         
         
-        
-        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
-        self.choreTableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
         
         //hide empty table rows
         var tblView =  UIView(frame: CGRectZero)
