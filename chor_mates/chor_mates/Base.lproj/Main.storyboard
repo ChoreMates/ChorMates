@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bvp-bY-stP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -703,28 +703,20 @@
                                 </items>
                                 <color key="barTintColor" red="0.66616152979999999" green="0.85334578800000005" blue="0.39837925819999997" alpha="0.75" colorSpace="calibratedRGB"/>
                             </tabBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4RM-eH-3Yj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NR1-Rr-eJz">
                                 <rect key="frame" x="0.0" y="56" width="600" height="495"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="495" id="BO5-tV-txw"/>
-                                    <constraint firstAttribute="width" constant="600" id="yfv-5e-eof"/>
-                                </constraints>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.42765727799999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Hcw-Al-mpS" secondAttribute="trailing" constant="-16" id="0nq-KM-LAI"/>
                             <constraint firstItem="Hcw-Al-mpS" firstAttribute="top" secondItem="Imy-Fr-QMv" secondAttribute="bottom" id="GGG-Uy-QH5"/>
-                            <constraint firstItem="4RM-eH-3Yj" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="TW5-8y-haX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4RM-eH-3Yj" secondAttribute="trailing" constant="-16" id="izC-FS-tx5"/>
                             <constraint firstItem="7lX-dK-Lte" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="k51-g1-y7w"/>
-                            <constraint firstItem="4RM-eH-3Yj" firstAttribute="top" secondItem="Hcw-Al-mpS" secondAttribute="bottom" constant="8" id="mUw-Ll-2ir"/>
                             <constraint firstItem="Hcw-Al-mpS" firstAttribute="leading" secondItem="D3Z-b7-pCJ" secondAttribute="leadingMargin" constant="-16" id="oxo-ey-5x4"/>
                             <constraint firstItem="Hcw-Al-mpS" firstAttribute="top" secondItem="Imy-Fr-QMv" secondAttribute="bottom" id="pZz-ia-baY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7lX-dK-Lte" secondAttribute="trailing" constant="-16" id="qZ0-0h-7p0"/>
                             <constraint firstItem="mYZ-ge-SV9" firstAttribute="top" secondItem="7lX-dK-Lte" secondAttribute="bottom" id="wl5-Tc-CTP"/>
-                            <constraint firstItem="7lX-dK-Lte" firstAttribute="top" secondItem="4RM-eH-3Yj" secondAttribute="bottom" id="y8e-zd-HH0"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1127,6 +1119,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qe-DT-5MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="972" y="2864"/>
         </scene>
         <!--Choremates-->
@@ -1705,13 +1698,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dJ-q4-RTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3061" y="4475"/>
+=======
+            <point key="canvasLocation" x="1212" y="1412"/>
+>>>>>>> origin/master
         </scene>
     </scenes>
     <resources>
         <image name="mop" width="400" height="637"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="azb-lN-SaM"/>
         <segue reference="q0F-Kx-Wgi"/>
-        <segue reference="SjV-bw-CjQ"/>
     </inferredMetricsTieBreakers>
 </document>
