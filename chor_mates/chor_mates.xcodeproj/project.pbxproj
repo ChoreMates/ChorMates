@@ -16,6 +16,10 @@
 		045632BA1B519BA800181F9F /* MyChoreTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045632B91B519BA800181F9F /* MyChoreTableCell.swift */; };
 		045632BC1B519BAD00181F9F /* MyChores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045632BB1B519BAD00181F9F /* MyChores.swift */; };
 		045632BE1B519BB500181F9F /* requestPickChore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045632BD1B519BB500181F9F /* requestPickChore.swift */; };
+		04D186321B5490A400FCE392 /* settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D186311B5490A400FCE392 /* settings.swift */; };
+		04D186341B5490B500FCE392 /* editProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D186331B5490B500FCE392 /* editProfileView.swift */; };
+		04D186361B5490BD00FCE392 /* changePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D186351B5490BD00FCE392 /* changePasswordView.swift */; };
+		04D186381B5490C500FCE392 /* changeHouseholdNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D186371B5490C500FCE392 /* changeHouseholdNameView.swift */; };
 		0AF9BA181B0187D300093132 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9BA171B0187D300093132 /* AppDelegate.swift */; };
 		0AF9BA1A1B0187D300093132 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9BA191B0187D300093132 /* LoginPage.swift */; };
 		0AF9BA1D1B0187D300093132 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF9BA1B1B0187D300093132 /* Main.storyboard */; };
@@ -67,6 +71,10 @@
 		045632B91B519BA800181F9F /* MyChoreTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChoreTableCell.swift; sourceTree = "<group>"; };
 		045632BB1B519BAD00181F9F /* MyChores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChores.swift; sourceTree = "<group>"; };
 		045632BD1B519BB500181F9F /* requestPickChore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = requestPickChore.swift; sourceTree = "<group>"; };
+		04D186311B5490A400FCE392 /* settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings.swift; sourceTree = "<group>"; };
+		04D186331B5490B500FCE392 /* editProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editProfileView.swift; sourceTree = "<group>"; };
+		04D186351B5490BD00FCE392 /* changePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changePasswordView.swift; sourceTree = "<group>"; };
+		04D186371B5490C500FCE392 /* changeHouseholdNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changeHouseholdNameView.swift; sourceTree = "<group>"; };
 		0AF9BA121B0187D200093132 /* chor_mates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chor_mates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF9BA161B0187D300093132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AF9BA171B0187D300093132 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -137,6 +145,7 @@
 		0449E6341B519FD700951C4B /* RoomatesTab */ = {
 			isa = PBXGroup;
 			children = (
+				04D186301B54907600FCE392 /* Settings */,
 				040BA8901B38F1040057A16A /* ChorematesViewController.swift */,
 			);
 			name = RoomatesTab;
@@ -152,6 +161,17 @@
 				045632B51B519B9400181F9F /* addExpense.swift */,
 			);
 			name = MyChoresTab;
+			sourceTree = "<group>";
+		};
+		04D186301B54907600FCE392 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				04D186371B5490C500FCE392 /* changeHouseholdNameView.swift */,
+				04D186351B5490BD00FCE392 /* changePasswordView.swift */,
+				04D186331B5490B500FCE392 /* editProfileView.swift */,
+				04D186311B5490A400FCE392 /* settings.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		0AF9BA091B0187D000093132 = {
@@ -382,12 +402,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D186341B5490B500FCE392 /* editProfileView.swift in Sources */,
 				4A9A63541B4F709C0031E612 /* Expenses.swift in Sources */,
 				4A6810461B36214600A78BF6 /* RegisterPage.swift in Sources */,
 				045632BE1B519BB500181F9F /* requestPickChore.swift in Sources */,
 				4A7D28F31B379A9800D9B5C7 /* ForgotPage.swift in Sources */,
 				040BA8911B38F1040057A16A /* ChorematesViewController.swift in Sources */,
 				0AF9BA1A1B0187D300093132 /* LoginPage.swift in Sources */,
+				04D186361B5490BD00FCE392 /* changePasswordView.swift in Sources */,
 				0AF9BA181B0187D300093132 /* AppDelegate.swift in Sources */,
 				045632BA1B519BA800181F9F /* MyChoreTableCell.swift in Sources */,
 				4A68104A1B37276000A78BF6 /* ViewTextController.swift in Sources */,
@@ -396,6 +418,8 @@
 				045632BC1B519BAD00181F9F /* MyChores.swift in Sources */,
 				4A4DDF731B38F742000132E9 /* HouseHoldPage.swift in Sources */,
 				045632B81B519BA000181F9F /* addRequest.swift in Sources */,
+				04D186321B5490A400FCE392 /* settings.swift in Sources */,
+				04D186381B5490C500FCE392 /* changeHouseholdNameView.swift in Sources */,
 				4A7D28EE1B3761E000D9B5C7 /* PopUpViewControllerSwift.swift in Sources */,
 				4A4DDF751B3A4551000132E9 /* CreateHouseHoldPage.swift in Sources */,
 			);

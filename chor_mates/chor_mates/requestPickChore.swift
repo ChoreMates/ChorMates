@@ -4,8 +4,8 @@ import ParseUI
 class requestPickChore: PFQueryTableViewController {
     var userSwapWithID: String = ""
     var selectedObject: PFObject?
-   
-
+    
+    
     @IBOutlet var choreSwapTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,10 @@ class requestPickChore: PFQueryTableViewController {
     override init(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.loadObjects()
+    }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -39,9 +42,9 @@ class requestPickChore: PFQueryTableViewController {
         return query1
     }
     
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+        
         var cell = tableView.dequeueReusableCellWithIdentifier("pickChoreCell") as! PFTableViewCell!
         if cell == nil {
             cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "pickChoreCell")
@@ -49,25 +52,25 @@ class requestPickChore: PFQueryTableViewController {
         var dateCreated = object?["endDate"] as! NSDate?
         var dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "MMM dd, yyyy"
-    
-    
+        
+        
         cell?.detailTextLabel?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
         
         if let pointer = object?["choreID"] as? PFObject {
             let choreName = pointer["choreName"] as! String
-    
-        cell?.textLabel?.text = choreName
-    
-    
+            
+            cell?.textLabel?.text = choreName
+            
+            
         }
-    
+        
         return cell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "pickedChoreUnwind" {
             if let addRequestViewController = segue.destinationViewController as? addRequest {
                 var selectedPath : NSIndexPath! = self.choreSwapTableView.indexPathForCell(sender as!UITableViewCell!)
-                 self.selectedObject = self.objectAtIndexPath(selectedPath)
+                self.selectedObject = self.objectAtIndexPath(selectedPath)
                 addRequestViewController.choreSwapWith = selectedObject!.objectId!
                 if let pointer = self.selectedObject?["choreID"] as? PFObject {
                     let choreName = pointer["choreName"] as! String
@@ -76,13 +79,13 @@ class requestPickChore: PFQueryTableViewController {
                     addRequestViewController.chorePickedTextField.textAlignment = .Center
                 }
             }
+        }
     }
-    }
-      
     
-        
-
     
-
-
+    
+    
+    
+    
+    
 }

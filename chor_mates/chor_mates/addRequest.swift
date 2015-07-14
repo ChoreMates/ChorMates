@@ -24,15 +24,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     @IBOutlet weak var yourChore: UITextField!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-       
-           // addRequestViewController.chorePickedTextField.text = self.selectedObject.objectId!
         
-
+        // addRequestViewController.chorePickedTextField.text = self.selectedObject.objectId!
+        
+        
     }
-
+    
     @IBAction func onPickChorePress(sender: AnyObject) {
         self.performSegueWithIdentifier("toPickChore", sender: userSwapWithID)
-
+        
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "toPickChore" {
@@ -42,9 +42,9 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
     }
-
+    
     @IBOutlet weak var chorePickedTextField: UITextField!
-
+    
     
     @IBOutlet weak var choremateLabel: UILabel!
     
@@ -73,15 +73,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             choreRequest["toChoreID"] = toPFObject["choreID"]
             choreRequest["status"] = "pending"
             choreRequest.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                // The object has been saved.
-            } else {
-                // There was a problem, check error.description
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The object has been saved.
+                } else {
+                    // There was a problem, check error.description
+                }
             }
         }
-        }
-
+        
         
     }
     override func viewDidLoad() {
@@ -97,7 +97,7 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         var chorematePicker: UIPickerView = UIPickerView(frame: pickerFrame)
         chorematePicker.showsSelectionIndicator = true
         chorematePicker.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
-
+        
         chorematePicker.delegate = self;
         chorematePicker.dataSource = self;
         chorematePicker.hidden = false;
@@ -105,23 +105,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         self.choremateTextField.inputView = chorematePicker
         
         
+        var query1 = PFQuery(className:"Household_User")
+        // query2.includeKey("userID")
+        query1.includeKey("householdID")
+        query1.whereKey("userID", equalTo: PFUser.currentUser()!)
         
-        var userQuery = PFQuery(className:"_User")
-        
-        userQuery.whereKey("username", equalTo: "lol@lol.com")
-        
-        var houseQuery = PFQuery(className: "Household")
-        
-        houseQuery.whereKey("name", equalTo: "NYU Thugs")
-        
-        var houseUserQuery = PFQuery(className: "Household_User")
-        
-        houseUserQuery.whereKey("householdID", matchesKey: "objectId", inQuery: houseQuery)
-        
+        var houseUserQuery = PFQuery(className:"Household_User")
         houseUserQuery.includeKey("userID")
-        
-        houseUserQuery.whereKey("userID", doesNotMatchKey: "objectId", inQuery: userQuery)
-        
+        houseUserQuery.whereKey("householdID", matchesKey: "householdID", inQuery: query1)
+        houseUserQuery.whereKey("userID", notEqualTo: PFUser.currentUser()!)
         houseUserQuery.findObjectsInBackgroundWithBlock {
             
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -207,13 +199,13 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         let pointer = chorematesList[row]["userID"] as! PFObject
-            
-            let fName = pointer["fName"] as! String
         
-            let lName = pointer["lName"] as! String
-            return fName + " " + lName
+        let fName = pointer["fName"] as! String
         
-      
+        let lName = pointer["lName"] as! String
+        return fName + " " + lName
+        
+        
         
     }
     
@@ -223,15 +215,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     {
         let pointer = chorematesList[row]["userID"] as! PFObject
-            
-            let fName = pointer["fName"] as! String
-            
-            let lName = pointer["lName"] as! String
-            choremateTextField.text = fName + " " + lName
-
         
-
-       //choremateTextField.text = self.chorematesList[row]
+        let fName = pointer["fName"] as! String
+        
+        let lName = pointer["lName"] as! String
+        choremateTextField.text = fName + " " + lName
+        
+        
+        
+        //choremateTextField.text = self.chorematesList[row]
         choremateTextField.textAlignment = .Center
         
         self.choremateTextField.resignFirstResponder()
@@ -240,15 +232,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let pointer = chorematesList[row]["userID"] as! PFObject
-            
-            let fName = pointer["fName"] as! String
-            
-            let lName = pointer["lName"] as! String
-            let titleData = fName + " " + lName
-
-            self.userSwapWithID = pointer.objectId!
         
-               var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.darkGrayColor()])
+        let fName = pointer["fName"] as! String
+        
+        let lName = pointer["lName"] as! String
+        let titleData = fName + " " + lName
+        
+        self.userSwapWithID = pointer.objectId!
+        
+        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.darkGrayColor()])
         return myTitle
     }
     func DismissPicker(){
@@ -260,13 +252,13 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
         }
     }
-
     
-   
-
-
-
-
-   
+    
+    
+    
+    
+    
+    
+    
     
 }

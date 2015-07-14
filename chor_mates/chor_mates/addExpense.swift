@@ -22,10 +22,10 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var choreID: String = ""
     var suppliesList: [String] = []
     var currPFObject: PFObject?
-
+    
     
     @IBOutlet weak var amountLabel: UITextField!
-   
+    
     @IBAction func addExpenseButton(sender: UIButton) {
         var inputTextField: UITextField?
         func addTextField(textField: UITextField!){
@@ -60,12 +60,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
         presentViewController(newWordPrompt, animated: true, completion: nil)
     }
     @IBOutlet weak var suppliesTableView: UITableView!
-    
-    override func viewDidLoad() {
-        suppliesTableView.dataSource = self
-        suppliesTableView.delegate = self
-        self.navigationItem.title = "Add Expenses"
-        
+    override func viewDidAppear(animated: Bool) {
         
         
         var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
@@ -96,18 +91,18 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 // Do something with the found objects
                 if let objects = objects as? [PFObject]
                 {
-                   for object: PFObject in objects
-                   {
+                    for object: PFObject in objects
+                    {
                         self.amountLabel.text = object["expenseAmount"] as? String
                         self.currPFObject = object
-                    if(object["expensesList"] != nil){
-                        self.suppliesList = object["expensesList"] as! [String]
-                        println (self.suppliesList[0])
-                    }
-                    
+                        if(object["expensesList"] != nil){
+                            self.suppliesList = object["expensesList"] as! [String]
+                            println (self.suppliesList[0])
+                        }
+                        
                     }
                 }
-            
+                
             }
             else
             {
@@ -119,16 +114,24 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 
                 
             };
-
+            
         }
         
-
-    
+    }
+    override func viewDidLoad() {
+        suppliesTableView.dataSource = self
+        suppliesTableView.delegate = self
+        self.navigationItem.title = "Add Expenses"
+        
+        
+        
+        
+        
     }
     func tableView(tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.suppliesList.count
-       }
+    }
     func numberOfSectionsInTableView(tableView:UITableView) -> Int {
         
         return 1
@@ -148,7 +151,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     func DismissKeyboard(){
-      
+        
         if(self.amountLabel.isFirstResponder())
         {
             view.endEditing(true)
@@ -166,7 +169,29 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
             var currChore: PFObject = self.currPFObject!
             if(currChore["expenseAmount"] as! String! != self.amountLabel.text)
             {
-            currChore["expenseAmount"] = self.amountLabel.text
+                currChore["expenseAmount"] = self.amountLabel.text
+                currChore.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        println("The object has been saved.")
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    //delete swipe action, delete item from database table
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            
+            suppliesList.removeAtIndex(indexPath.row)
+            suppliesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            var currChore: PFObject = self.currPFObject!
+            currChore["expensesList"] = self.suppliesList
             currChore.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
@@ -175,31 +200,9 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
                     // There was a problem, check error.description
                 }
             }
-            }
-           
-        }
-    }
-    
-    //delete swipe action, delete item from database table
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-                
-                suppliesList.removeAtIndex(indexPath.row)
-                suppliesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                var currChore: PFObject = self.currPFObject!
-                currChore["expensesList"] = self.suppliesList
-                currChore.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        println("The object has been saved.")
-                    } else {
-                    // There was a problem, check error.description
-                    }
-                }
             
         }
     }
     
-
+    
 }
