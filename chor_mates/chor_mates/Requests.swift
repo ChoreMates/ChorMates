@@ -11,12 +11,40 @@ import Parse
 import ParseUI
 
 class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    func retrieveObjectsFromParse()
-    {
+    
+    @IBOutlet var requestsTable: UITableView!
+    
+    var refreshControl = UIRefreshControl()
+    var inReq : [PFObject] = []
+    var outReq : [PFObject] = []
+    var householdReq : [PFObject] = []
+    
+    var myHousehold: PFObject?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //navigationItem.title = "Requests"
+        requestsTable.reloadData()
+        
+        //pull to refresh table view control
+        refreshControl.addTarget(self, action: Selector("refreshTableView:"), forControlEvents: UIControlEvents.ValueChanged)
+        requestsTable.addSubview(refreshControl)
+        
+        requestsTable.delegate = self
+        requestsTable.dataSource = self
+        
+        //hide empty table rows
+        var tblView =  UIView(frame: CGRectZero)
+        requestsTable.tableFooterView = tblView
+        requestsTable.tableFooterView!.hidden = true
+        requestsTable.backgroundColor = UIColor.clearColor()
+        
+        retrieveObjectsFromParse()
     }
     
     override func viewDidAppear(animated: Bool) {
-        //reload the data
+        self.requestsTable.reloadData()
+        retrieveObjectsFromParse()
     }
     
     //section headers
@@ -30,31 +58,136 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else if section == 2 {
             return "Outgoing Requests"
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = "Requets"
-        //reload the data
-        
-        //pull to refresh table view control
-        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
-        
-        //hide empty table rows
-        var tblView =  UIView(frame: CGRectZero)
-        choreTableView.tableFooterView = tblView
-        choreTableView.tableFooterView!.hidden = true
-        choreTableView.backgroundColor = UIColor.clearColor()
-        
-        retrieveObjectsFromParse()
-        
+        else {
+            println("Not a section!")
+            return "Fake!"
+        }
     }
     
     func refreshTableView(sender:AnyObject)
     {
-        self.choreTableView.reloadData()
+        self.requestsTable.reloadData()
         retrieveObjectsFromParse()
         self.refreshControl.endRefreshing()
+    }
+    
+    func retrieveObjectsFromParse()
+    {
+        let me = PFUser.currentUser()!
+        var count = 0;
+        
+        var inQuery = PFQuery(className: "Chore_Request")
+        inQuery.includeKey("senderChoreID")
+        inQuery.includeKey("senderUserID")
+        inQuery.includeKey("toChoreID")
+        inQuery.whereKey("toUserID", equalTo: me)
+        inQuery.orderByDescending("createdAt")
+        inQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if(objects!.count == 0) {
+                    //++count
+                }
+                else {
+                    if let incoming = objects as? [PFObject] {
+                        self.inReq.removeAll(keepCapacity: false)
+                        
+                        for request in incoming {
+                            self.inReq.append(request)
+                        }
+                        
+                        //++count
+                        //if(count == 3) {
+                            self.requestsTable.reloadData()
+                        //}
+                    }
+                }
+            }
+            else {
+                println("Error Incoming! \(error?.description)")
+            }
+        }
+        
+        var outQuery = PFQuery(className: "Chore_Request")
+        outQuery.includeKey("senderChoreID")
+        outQuery.includeKey("toChoreID")
+        outQuery.includeKey("toUserID")
+        outQuery.whereKey("senderUserID", equalTo: me)
+        outQuery.orderByDescending("createdAt")
+        outQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if(objects!.count == 0) {
+                    //++count
+                }
+                else {
+                    if let outgoing = objects as? [PFObject] {
+                        self.outReq.removeAll(keepCapacity: false)
+                        
+                        for request in outgoing {
+                            self.outReq.append(request)
+                        }
+                        
+                        //++count
+                        //if(count == 3) {
+                            self.requestsTable.reloadData()
+                        //}
+                    }
+                }
+            }
+            else {
+                println("Error Outgoing! \(error?.description)")
+            }
+        }
+        
+        var hhUserQuery = PFQuery(className: "Household_User")
+        hhUserQuery.includeKey("householdID")
+        hhUserQuery.whereKey("userID", equalTo: me)
+        hhUserQuery.findObjectsInBackgroundWithBlock {
+            (usersHH: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if(usersHH!.count == 0) {
+                    println("None found! Weird....")
+                }
+                else {
+                    if let usersHH = usersHH as? [PFObject] {
+                        var userHH = usersHH.first!
+                        var hh = userHH["householdID"]! as! PFObject
+                        
+                        self.myHousehold = hh
+                        var hhQuery = PFQuery(className: "HouseInvitation")
+                        hhQuery.includeKey("userID")
+                        hhQuery.orderByDescending("createdAt")
+                        hhQuery.whereKey("householdID", equalTo: userHH["householdID"]!)
+                        hhQuery.findObjectsInBackgroundWithBlock {
+                            (objects: [AnyObject]?, error: NSError?) -> Void in
+                            if error == nil {
+                                if(objects!.count == 0) {
+                                    //++count
+                                }
+                                else {
+                                    if let houseRequests = objects as? [PFObject] {
+                                        self.householdReq.removeAll(keepCapacity: false)
+                                        
+                                        for request in houseRequests {
+                                            self.householdReq.append(request)
+                                        }
+                                        
+                                        //++count
+                                        //if(count == 3) {
+                                            self.requestsTable.reloadData()
+                                        //}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                println("Error Household! \(error?.description)")
+            }
+        }
     }
     
     
@@ -65,129 +198,114 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        
-        var currChore: PFObject!
-        if(indexPath.section == 0)
-        {
-            
-            currChore = self.choreObjectCurrent[indexPath.row]
-        }
-        else if(indexPath.section == 1)
-        {
-            currChore = self.choreObjectFuture[indexPath.row]
-        }
-        //request action
-        var requestAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Request" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            if(indexPath.section == 0)
-            {
-                if let pointer = self.choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
-                    self.choreNameToSwap = pointer["choreName"] as! String!
-                    
-                }
-                if let pointer = self.choreObjectCurrent[indexPath.row]["userID"] as? PFObject {
-                    self.currentUserID = pointer.objectId
-                }
-                
-                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectCurrent[indexPath.row])
-            }
-            else{
-                
-                if let pointer = self.choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
-                    self.choreNameToSwap = pointer["choreName"] as! String!
-                }
-                if let pointer = self.choreObjectFuture[indexPath.row]["userID"] as? PFObject {
-                    self.currentUserID = pointer.objectId
-                }
-                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectFuture[indexPath.row])
-            }
-            
-        })
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+//        
+//        var currChore: PFObject!
+//        if(indexPath.section == 0)
+//        {
+//            
+//            //currChore = self.choreObjectCurrent[indexPath.row]
+//        }
+//        else if(indexPath.section == 1)
+//        {
+//            //currChore = self.choreObjectFuture[indexPath.row]
+//        }
+//        //request action
+//        var requestAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Request" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+//            
+//            if(indexPath.section == 0)
+//            {
+//                if let pointer = self.choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
+//                    self.choreNameToSwap = pointer["choreName"] as! String!
+//                    
+//                }
+//                if let pointer = self.choreObjectCurrent[indexPath.row]["userID"] as? PFObject {
+//                    self.currentUserID = pointer.objectId
+//                }
+//                
+//                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectCurrent[indexPath.row])
+//            }
+//            else{
+//                
+//                if let pointer = self.choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
+//                    self.choreNameToSwap = pointer["choreName"] as! String!
+//                }
+//                if let pointer = self.choreObjectFuture[indexPath.row]["userID"] as? PFObject {
+//                    self.currentUserID = pointer.objectId
+//                }
+//                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectFuture[indexPath.row])
+//            }
+//            
+//        })
         //expense action
-        var expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            if(indexPath.section == 0)
-            {
-                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectCurrent[indexPath.row])
-            }
-            else{
-                
-                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectFuture[indexPath.row])
-            }
-            
-            
-            
-        })
-        //done chore action
-        var doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            let doneMenu = UIAlertController(title: nil, message: "Confirm Completion", preferredStyle: .Alert)
-            
-            let appRateAction = UIAlertAction(title: "Completed", style: UIAlertActionStyle.Default)
-                { action -> Void in
-                    if(indexPath.section == 0)
-                    {
-                        
-                        
-                        currChore["status"] = "completed"
-                        currChore["completedDate"] = NSDate()
-                        currChore.saveInBackgroundWithBlock {
-                            (success: Bool, error: NSError?) -> Void in
-                            if (success) {
-                                println("The object has been saved.")
-                            } else {
-                                // There was a problem, check error.description
-                            }
-                        }
-                        
-                    }
-                    else if(indexPath.section == 1)
-                    {
-                        
-                        
-                        currChore["status"] = "completed"
-                        currChore["completedDate"] = NSDate()
-                        currChore.saveInBackgroundWithBlock {
-                            (success: Bool, error: NSError?) -> Void in
-                            if (success) {
-                                println("The object has been saved.")
-                            } else {
-                                // There was a problem, check error.description
-                            }
-                        }
-                        
-                    }
-                    self.choreTableView.reloadData()
-                    self.retrieveObjectsFromParse()
-                    
-                    
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            doneMenu.addAction(appRateAction)
-            doneMenu.addAction(cancelAction)
-            
-            
-            
-            self.presentViewController(doneMenu, animated: true, completion: nil)
-        })
-        requestAction.backgroundColor = UIColor(red: 0.5, green: 0.4, blue: 0.4, alpha: 1.0)
-        expenseAction.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.5, alpha: 1.0)
-        doneAction.backgroundColor = UIColor(red: 0.3, green: 0.4, blue: 0.2, alpha: 1.0)
+//        var expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+//            
+//            if(indexPath.section == 0)
+//            {
+//                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectCurrent[indexPath.row])
+//            }
+//            else{
+//                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectFuture[indexPath.row])
+//            }
+//        })
+//        //done chore action
+//        var doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+//            
+//            let doneMenu = UIAlertController(title: nil, message: "Confirm Completion", preferredStyle: .Alert)
+//            
+//            let appRateAction = UIAlertAction(title: "Completed", style: UIAlertActionStyle.Default)
+//                { action -> Void in
+//                    if(indexPath.section == 0)
+//                    {
+//                        currChore["status"] = "completed"
+//                        currChore["completedDate"] = NSDate()
+//                        currChore.saveInBackgroundWithBlock {
+//                            (success: Bool, error: NSError?) -> Void in
+//                            if (success) {
+//                                println("The object has been saved.")
+//                            } else {
+//                                // There was a problem, check error.description
+//                            }
+//                        }
+//                    }
+//                    else if(indexPath.section == 1)
+//                    {
+//                        currChore["status"] = "completed"
+//                        currChore["completedDate"] = NSDate()
+//                        currChore.saveInBackgroundWithBlock {
+//                            (success: Bool, error: NSError?) -> Void in
+//                            if (success) {
+//                                println("The object has been saved.")
+//                            } else {
+//                                // There was a problem, check error.description
+//                            }
+//                        }
+//                    }
+//                    self.requestsTable.reloadData()
+//                    self.retrieveObjectsFromParse()
+//            }
+//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+//            
+//            doneMenu.addAction(appRateAction)
+//            doneMenu.addAction(cancelAction)
+//            
+//            self.presentViewController(doneMenu, animated: true, completion: nil)
+//        })
+//        requestAction.backgroundColor = UIColor(red: 0.5, green: 0.4, blue: 0.4, alpha: 1.0)
+//        expenseAction.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.5, alpha: 1.0)
+//        doneAction.backgroundColor = UIColor(red: 0.3, green: 0.4, blue: 0.2, alpha: 1.0)
         
-        //if the chore is still pending
-        if(currChore["status"] as! String! == "pending")
-        {
-            return [requestAction,expenseAction,doneAction]
-        }
-            //if the chore is completed
-        else
-        {
-            return [expenseAction]
-        }
-    }
+//        //if the chore is still pending
+//        if(currChore["status"] as! String! == "pending")
+//        {
+//            return [requestAction,expenseAction,doneAction]
+//        }
+//            //if the chore is completed
+//        else
+//        {
+//            return [expenseAction]
+//        }
+//    }
     
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
@@ -196,124 +314,74 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            //return self.choreObject.count
-            //return getNumberOfRows(self.choreObject,option: 0)
-            return self.choreObjectCurrent.count
+            return self.householdReq.count
         }
-        
-        //return self.choreObject.count
-        return self.choreObjectFuture.count
-        
-        //  return groupList.count
+        else if section == 1 {
+            return self.inReq.count
+        }
+        else { //section == 2
+            return self.outReq.count
+        }
     }
     
     func numberOfSectionsInTableView(tableView:UITableView) -> Int {
-        
         return 3
     }
     
     func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        var cell:MyChoreTableCell = tableView.dequeueReusableCellWithIdentifier("Cell2") as! MyChoreTableCell
+        var cell:RequestTableCell = tableView.dequeueReusableCellWithIdentifier("RequestCell") as! RequestTableCell
         
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
         
-        
-        if( indexPath.section == 0){
-            
-            var dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
-            var components = NSDateComponents()
-            components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
-            let date: NSDate = NSDate()
-            
-            var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
-            
-            if dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedAscending
-            {
-                if let pointer = choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
-                    cell.choreName?.text = pointer["choreName"] as! String!
-                    
-                }
-                if( choreObjectCurrent[indexPath.row]["status"] as! String! == "pending")
-                {
-                    var dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
-                    dateFormat.dateFormat = "MM.dd.yyyy"
-                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-                    
-                }
-                else
-                {
-                    var dateCreated = choreObjectCurrent[indexPath.row]["completedDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
-                    dateFormat.dateFormat = "MM.dd.yyyy"
-                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-                    
-                }
-                if(choreObjectCurrent[indexPath.row]["expenseAmount"] != nil)
-                {
-                    cell.choreExpense.text = choreObjectCurrent[indexPath.row]["expenseAmount"] as! String!
-                }
-                else
-                {
-                    cell.choreExpense.text = "$0"
-                    
-                }
+        if( indexPath.section == 0) {
+            if let pointer = householdReq[indexPath.row]["userID"] as? PFUser {
+                var fName = pointer["fName"] as! String
+                var lName = pointer["lName"] as! String
+                let name = fName + " " + lName
+                cell.reqText.text! = "Let me in!"
+                cell.reqText2.text! = name
+                
+                cell.from.text! = pointer.username!
             }
+            
+            var dateCreated = householdReq[indexPath.row].createdAt
+            var dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "MM.dd.yyyy"
+            cell.reqDate.text! = "Reqested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
         }
-        else if(indexPath.section == 1){
-            
-            var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
-            var components = NSDateComponents()
-            components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
-            let date: NSDate = NSDate()
-            
-            var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
-            
-            if dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedDescending
-            {
-                
-                if let pointer = choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
-                    cell.choreName?.text = pointer["choreName"] as! String!
-                    
-                }
-                
-                
-                
-                if( choreObjectFuture[indexPath.row]["status"] as! String! == "pending"){
-                    var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
-                    dateFormat.dateFormat = "MM.dd.yyyy"
-                    
-                    
-                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-                    
-                }
-                else{
-                    var dateCreated = choreObjectFuture[indexPath.row]["completedDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
-                    dateFormat.dateFormat = "MM.dd.yyyy"
-                    
-                    
-                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
-                    
-                }
-                
-                
-                if(choreObjectFuture[indexPath.row]["expenseAmount"] != nil)
-                {
-                    cell.choreExpense.text = choreObjectFuture[indexPath.row]["expenseAmount"] as! String!
-                }
-                else
-                {
-                    cell.choreExpense.text = "$0"
-                    
-                }
+        else if(indexPath.section == 1) {
+            if let fromChore = inReq[indexPath.row]["senderChoreID"] as? PFObject {
+                cell.reqText.text! = fromChore["choreName"] as! String
+            }
+            if let forChore = inReq[indexPath.row]["toChoreID"] as? PFObject {
+                cell.reqText2.text! = "For: " + (forChore["choreName"] as! String)
+            }
+            if let fromPerson = inReq[indexPath.row]["senderUserID"] as? PFUser {
+                cell.from.text! = (fromPerson["fName"]! as! String)
             }
             
+            var dateCreated = inReq[indexPath.row].createdAt
+            var dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "MM.dd.yyyy"
+            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+        }
+        else if(indexPath.section == 2) {
+            if let toChore = outReq[indexPath.row]["senderChoreID"] as? PFObject {
+                cell.reqText.text! = toChore["choreName"] as! String
+            }
+            if let sentChore = outReq[indexPath.row]["toChoreID"] as? PFObject {
+                cell.reqText2.text! = "For: " + (sentChore["choreName"] as! String)
+            }
+            if let toPerson = outReq[indexPath.row]["toUserID"] as? PFUser {
+                cell.from.text! = (toPerson["fName"]! as! String)
+            }
             
-            
+            var dateCreated = outReq[indexPath.row].createdAt
+            var dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "MM.dd.yyyy"
+            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
         }
         return cell
     }

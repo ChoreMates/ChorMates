@@ -50,6 +50,7 @@
 		4AC6B4301B12B7A5008A46EC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F4191B12B5F500AC8FA6 /* StoreKit.framework */; };
 		4AC6B4311B12B7A5008A46EC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A92F41A1B12B5F500AC8FA6 /* SystemConfiguration.framework */; };
 		4AD2F5681B548A0600A59DA9 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2F5671B548A0600A59DA9 /* Requests.swift */; };
+		4AD2F56A1B54A7A800A59DA9 /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2F5691B54A7A800A59DA9 /* RequestTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		4A9A48851B47320F0098BD03 /* JoinHouseholdPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinHouseholdPage.swift; sourceTree = "<group>"; };
 		4A9A63531B4F709C0031E612 /* Expenses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expenses.swift; sourceTree = "<group>"; };
 		4AD2F5671B548A0600A59DA9 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		4AD2F5691B54A7A800A59DA9 /* RequestTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD2F5671B548A0600A59DA9 /* Requests.swift */,
+				4AD2F5691B54A7A800A59DA9 /* RequestTableCell.swift */,
 			);
 			name = RequestsTab;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				4A4DDF731B38F742000132E9 /* HouseHoldPage.swift in Sources */,
 				045632B81B519BA000181F9F /* addRequest.swift in Sources */,
 				04D186321B5490A400FCE392 /* settings.swift in Sources */,
+				4AD2F56A1B54A7A800A59DA9 /* RequestTableCell.swift in Sources */,
 				04D186381B5490C500FCE392 /* changeHouseholdNameView.swift in Sources */,
 				4A7D28EE1B3761E000D9B5C7 /* PopUpViewControllerSwift.swift in Sources */,
 				4A4DDF751B3A4551000132E9 /* CreateHouseHoldPage.swift in Sources */,
