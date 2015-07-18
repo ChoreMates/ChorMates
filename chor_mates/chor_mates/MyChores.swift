@@ -197,42 +197,18 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             let appRateAction = UIAlertAction(title: "Completed", style: UIAlertActionStyle.Default)
                 { action -> Void in
-                    if(indexPath.section == 0)
-                    {
-                        
-                        
-                        currChore["status"] = "completed"
-                        currChore["completedDate"] = NSDate()
-                        currChore.saveInBackgroundWithBlock {
-                            (success: Bool, error: NSError?) -> Void in
-                            if (success) {
-                                println("The object has been saved.")
-                            } else {
-                                // There was a problem, check error.description
-                            }
+                    currChore["status"] = "completed"
+                    currChore["completedDate"] = NSDate()
+                    currChore.saveInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                        if (success) {
+                            println("The object has been saved.")
+                        } else {
+                            // There was a problem, check error.description
                         }
-                        
-                    }
-                    else if(indexPath.section == 1)
-                    {
-                        
-                        
-                        currChore["status"] = "completed"
-                        currChore["completedDate"] = NSDate()
-                        currChore.saveInBackgroundWithBlock {
-                            (success: Bool, error: NSError?) -> Void in
-                            if (success) {
-                                println("The object has been saved.")
-                            } else {
-                                // There was a problem, check error.description
-                            }
-                        }
-                        
                     }
                     self.choreTableView.reloadData()
                     self.retrieveObjectsFromParse()
-                    
-                    
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             

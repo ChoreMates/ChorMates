@@ -87,6 +87,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if error == nil {
                 if(objects!.count == 0) {
                     //++count
+                    self.inReq.removeAll(keepCapacity: false)
                 }
                 else {
                     if let incoming = objects as? [PFObject] {
@@ -119,6 +120,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if error == nil {
                 if(objects!.count == 0) {
                     //++count
+                    self.outReq.removeAll(keepCapacity: false)
                 }
                 else {
                     if let outgoing = objects as? [PFObject] {
@@ -164,6 +166,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             if error == nil {
                                 if(objects!.count == 0) {
                                     //++count
+                                    self.householdReq.removeAll(keepCapacity: false)
                                 }
                                 else {
                                     if let houseRequests = objects as? [PFObject] {
@@ -198,114 +201,202 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-//        
-//        var currChore: PFObject!
-//        if(indexPath.section == 0)
-//        {
-//            
-//            //currChore = self.choreObjectCurrent[indexPath.row]
-//        }
-//        else if(indexPath.section == 1)
-//        {
-//            //currChore = self.choreObjectFuture[indexPath.row]
-//        }
-//        //request action
-//        var requestAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Request" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-//            
-//            if(indexPath.section == 0)
-//            {
-//                if let pointer = self.choreObjectCurrent[indexPath.row]["choreID"] as? PFObject {
-//                    self.choreNameToSwap = pointer["choreName"] as! String!
-//                    
-//                }
-//                if let pointer = self.choreObjectCurrent[indexPath.row]["userID"] as? PFObject {
-//                    self.currentUserID = pointer.objectId
-//                }
-//                
-//                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectCurrent[indexPath.row])
-//            }
-//            else{
-//                
-//                if let pointer = self.choreObjectFuture[indexPath.row]["choreID"] as? PFObject {
-//                    self.choreNameToSwap = pointer["choreName"] as! String!
-//                }
-//                if let pointer = self.choreObjectFuture[indexPath.row]["userID"] as? PFObject {
-//                    self.currentUserID = pointer.objectId
-//                }
-//                self.performSegueWithIdentifier("toRequest", sender: self.choreObjectFuture[indexPath.row])
-//            }
-//            
-//        })
-        //expense action
-//        var expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-//            
-//            if(indexPath.section == 0)
-//            {
-//                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectCurrent[indexPath.row])
-//            }
-//            else{
-//                self.performSegueWithIdentifier("toExpense", sender: self.choreObjectFuture[indexPath.row])
-//            }
-//        })
-//        //done chore action
-//        var doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-//            
-//            let doneMenu = UIAlertController(title: nil, message: "Confirm Completion", preferredStyle: .Alert)
-//            
-//            let appRateAction = UIAlertAction(title: "Completed", style: UIAlertActionStyle.Default)
-//                { action -> Void in
-//                    if(indexPath.section == 0)
-//                    {
-//                        currChore["status"] = "completed"
-//                        currChore["completedDate"] = NSDate()
-//                        currChore.saveInBackgroundWithBlock {
-//                            (success: Bool, error: NSError?) -> Void in
-//                            if (success) {
-//                                println("The object has been saved.")
-//                            } else {
-//                                // There was a problem, check error.description
-//                            }
-//                        }
-//                    }
-//                    else if(indexPath.section == 1)
-//                    {
-//                        currChore["status"] = "completed"
-//                        currChore["completedDate"] = NSDate()
-//                        currChore.saveInBackgroundWithBlock {
-//                            (success: Bool, error: NSError?) -> Void in
-//                            if (success) {
-//                                println("The object has been saved.")
-//                            } else {
-//                                // There was a problem, check error.description
-//                            }
-//                        }
-//                    }
-//                    self.requestsTable.reloadData()
-//                    self.retrieveObjectsFromParse()
-//            }
-//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-//            
-//            doneMenu.addAction(appRateAction)
-//            doneMenu.addAction(cancelAction)
-//            
-//            self.presentViewController(doneMenu, animated: true, completion: nil)
-//        })
-//        requestAction.backgroundColor = UIColor(red: 0.5, green: 0.4, blue: 0.4, alpha: 1.0)
-//        expenseAction.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.5, alpha: 1.0)
-//        doneAction.backgroundColor = UIColor(red: 0.3, green: 0.4, blue: 0.2, alpha: 1.0)
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         
-//        //if the chore is still pending
-//        if(currChore["status"] as! String! == "pending")
-//        {
-//            return [requestAction,expenseAction,doneAction]
-//        }
-//            //if the chore is completed
-//        else
-//        {
-//            return [expenseAction]
-//        }
-//    }
+        var currObj: PFObject!
+        
+        if(indexPath.section == 0)
+        {
+            currObj = householdReq[indexPath.row]
+        }
+        else if(indexPath.section == 1)
+        {
+            currObj = inReq[indexPath.row]
+        }
+        else { //indexPath.section == 2
+            currObj = outReq[indexPath.row]
+        }
+        
+        if(indexPath.section == 0 || indexPath.section == 1) {
+            var acceptAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                let alertBox = UIAlertController(title: nil, message: "Accept Request", preferredStyle: .Alert)
+                
+                let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default) {
+                    action -> Void in
+                    //if Household request, delete from HouseholdInvitationTable, add to Household_User Table
+                    var user: PFUser?
+                    var myNewChore: PFObject?
+                    var myOldChore: PFObject?
+                    if(indexPath.section == 0) {
+                        user = currObj["userID"]! as? PFUser
+                    }
+                        
+                        //If Incoming request, delete from Chore_Request Table, modify Chore_User Table
+                    else { //indexPath.section == 1
+                        user = currObj["senderUserID"]! as? PFUser
+                        myNewChore = currObj["senderChoreID"]! as? PFObject
+                        myOldChore = currObj["toChoreID"]! as? PFObject
+                    }
+                    
+                    currObj.deleteInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                        if (success) {
+                            println("The object has been removed. Going to start the save!")
+                            
+                            if(indexPath.section == 0) {
+                                var userHH = PFObject(className: "Household_User")
+                                userHH["userID"] = user!
+                                userHH["householdID"] = self.myHousehold!
+                                userHH.saveInBackgroundWithBlock {
+                                    (success: Bool, error: NSError?) -> Void in
+                                    if (success) {
+                                        println("The object has been saved!")
+                                        self.refreshTableView(PFUser.currentUser()!)
+                                    }
+                                    else {
+                                        println("Error!! \(error?.description)")
+                                    }
+                                }
+                            }
+                            else { //indexPath.section == 2
+                                //Assign other chore to me
+                                var query = PFQuery(className: "Chore_User")
+                                query.whereKey("choreID", equalTo: myNewChore!)
+                                query.whereKey("userID", equalTo: user!)
+                                query.findObjectsInBackgroundWithBlock {
+                                    (choreUsers: [AnyObject]?, error: NSError?) -> Void in
+                                    if error == nil {
+                                        if(choreUsers!.count == 0) {
+                                            println("Can't find my new chore!")
+                                        }
+                                        else {
+                                            println("Found something goooood!")
+                                            if let choreUsers = choreUsers as? [PFObject] {
+                                                var choreUser = choreUsers.first!
+                                                choreUser["swapID"] = PFUser.currentUser()!
+                                                choreUser.saveInBackgroundWithBlock {
+                                                    (success: Bool, error: NSError?) -> Void in
+                                                    if (success) {
+                                                        println("Got his chore!")
+                                                    }
+                                                    else {
+                                                        println("Error?!?! \(error?.description)")
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        println("Error!?! \(error?.description)")
+                                    }
+                                }
+                                //Assign my chore to other
+                                var query2 = PFQuery(className: "Chore_User")
+                                query2.whereKey("choreID", equalTo: myOldChore!)
+                                query2.whereKey("userID", equalTo: PFUser.currentUser()!)
+                                query2.findObjectsInBackgroundWithBlock {
+                                    (choreUsers: [AnyObject]?, error: NSError?) -> Void in
+                                    if error == nil {
+                                        if(choreUsers!.count == 0) {
+                                            println("Can't find my old chore!")
+                                        }
+                                        else {
+                                            if let choreUsers = choreUsers as? [PFObject] {
+                                                var choreUser = choreUsers.first!
+                                                choreUser["swapID"] = user!
+                                                choreUser.saveInBackgroundWithBlock {
+                                                    (success: Bool, error: NSError?) -> Void in
+                                                    if (success) {
+                                                        println("Gave him my chore!")
+                                                        self.refreshTableView(PFUser.currentUser()!)
+                                                    }
+                                                    else {
+                                                        println("Error?!?! \(error?.description)")
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        println("Error!?! \(error?.description)")
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            println("Error?! \(error?.description)")
+                        }
+                    }
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                
+                alertBox.addAction(confirmAction)
+                alertBox.addAction(cancelAction)
+                
+                self.presentViewController(alertBox, animated: true, completion: nil)
+            })
+            
+            var rejectAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                let alertBox = UIAlertController(title: nil, message: "Reject Request", preferredStyle: .Alert)
+                
+                let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default)
+                    { action -> Void in
+                        //remove from Chore_Request Table
+                        currObj.deleteInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                println("The object has been removed.")
+                                
+                                self.refreshTableView(PFUser.currentUser()!)
+                            }
+                            else {
+                                println("Error?! \(error?.description)")
+                            }
+                        }
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                
+                alertBox.addAction(confirmAction)
+                alertBox.addAction(cancelAction)
+                
+                self.presentViewController(alertBox, animated: true, completion: nil)
+            })
+            
+            acceptAction.backgroundColor = UIColor(red: 0.1, green: 0.7, blue: 0.2, alpha: 1.0)
+            rejectAction.backgroundColor = UIColor(red: 0.9, green: 0.1, blue: 0.2, alpha: 1.0)
+            return [acceptAction, rejectAction]
+        }
+        else { //indexPath.section == 2
+            var cancelAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                var alertBox = UIAlertController(title: nil, message: "Cancel Request", preferredStyle: .Alert)
+                
+                let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default)
+                    { action -> Void in
+                        //delete currObj from database
+                        currObj.deleteInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                println("The object has been removed.")
+                                
+                                self.refreshTableView(PFUser.currentUser()!)
+                            }
+                            else {
+                                println("Error?! \(error?.description)")
+                            }
+                        }
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                
+                alertBox.addAction(confirmAction)
+                alertBox.addAction(cancelAction)
+                
+                self.presentViewController(alertBox, animated: true, completion: nil)
+            })
+            
+            cancelAction.backgroundColor = UIColor(red: 0.9, green: 0.1, blue: 0.2, alpha: 1.0)
+            return [cancelAction]
+        }
+    }
     
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return index
@@ -335,7 +426,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
         
-        if( indexPath.section == 0) {
+        if( indexPath.section == 0 && householdReq.count != 0) {
             if let pointer = householdReq[indexPath.row]["userID"] as? PFUser {
                 var fName = pointer["fName"] as! String
                 var lName = pointer["lName"] as! String
@@ -351,7 +442,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             dateFormat.dateFormat = "MM.dd.yyyy"
             cell.reqDate.text! = "Reqested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
         }
-        else if(indexPath.section == 1) {
+        else if(indexPath.section == 1 && inReq.count != 0) {
             if let fromChore = inReq[indexPath.row]["senderChoreID"] as? PFObject {
                 cell.reqText.text! = fromChore["choreName"] as! String
             }
@@ -367,7 +458,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             dateFormat.dateFormat = "MM.dd.yyyy"
             cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
         }
-        else if(indexPath.section == 2) {
+        else if(indexPath.section == 2 && outReq.count != 0) {
             if let toChore = outReq[indexPath.row]["senderChoreID"] as? PFObject {
                 cell.reqText.text! = toChore["choreName"] as! String
             }
