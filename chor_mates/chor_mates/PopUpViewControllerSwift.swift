@@ -17,7 +17,7 @@ import QuartzCore
     
     var execCloseFunc:((Void)->Void)?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

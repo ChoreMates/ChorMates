@@ -31,12 +31,12 @@ class ForgotPage: ViewTextController
     
     @IBAction func SendPassword(sender: UIButton) {
         DismissKeyboard()
-        if(!email.text.isEmpty)
+        if(!email.text!.isEmpty)
         {
-            PFUser.requestPasswordResetForEmailInBackground(email.text) {
+            PFUser.requestPasswordResetForEmailInBackground(email.text!) {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if let error = error {
-                    let errorString = error.userInfo?["error"] as? String
+                    let errorString = error.userInfo["error"] as? String
                     self.PopUp("Can't Find E-Mail", image: nil, msg: errorString!, animate: true)
                 }
                 else {

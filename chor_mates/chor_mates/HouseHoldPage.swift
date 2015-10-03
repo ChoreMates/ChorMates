@@ -15,7 +15,7 @@ class HouseHoldPage: ViewTextController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationItem.setHidesBackButton(true, animated: true)
-        var logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
+        let logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
         logoutButton.tintColor = UIColor.whiteColor()
         //logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Noteworthy", size: 20)!], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItem = logoutButton

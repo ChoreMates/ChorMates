@@ -20,7 +20,7 @@ class requestPickChore: PFQueryTableViewController {
         self.loadObjects()
     }
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
         self.parseClassName = "Chore_User"
@@ -30,11 +30,11 @@ class requestPickChore: PFQueryTableViewController {
     }
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        var userQuery = PFQuery(className: "_User")
+        let userQuery = PFQuery(className: "_User")
         userQuery.whereKey("objectId", equalTo: userSwapWithID)
-        println(userSwapWithID)
+        print(userSwapWithID)
         
-        var query1 = PFQuery(className:"Chore_User")
+        let query1 = PFQuery(className:"Chore_User")
         query1.includeKey("userID")
         query1.whereKey("userID", matchesKey: "objectId", inQuery: userQuery)
         query1.includeKey("choreID")
@@ -49,12 +49,12 @@ class requestPickChore: PFQueryTableViewController {
         if cell == nil {
             cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "pickChoreCell")
         }
-        var dateCreated = object?["endDate"] as! NSDate?
-        var dateFormat = NSDateFormatter()
+        let dateCreated = object?["endDate"] as! NSDate?
+        let dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "MMM dd, yyyy"
         
         
-        cell?.detailTextLabel?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+        cell?.detailTextLabel?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
         
         if let pointer = object?["choreID"] as? PFObject {
             let choreName = pointer["choreName"] as! String
@@ -69,7 +69,7 @@ class requestPickChore: PFQueryTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "pickedChoreUnwind" {
             if let addRequestViewController = segue.destinationViewController as? addRequest {
-                var selectedPath : NSIndexPath! = self.choreSwapTableView.indexPathForCell(sender as!UITableViewCell!)
+                let selectedPath : NSIndexPath! = self.choreSwapTableView.indexPathForCell(sender as!UITableViewCell!)
                 self.selectedObject = self.objectAtIndexPath(selectedPath)
                 addRequestViewController.choreSwapWith = selectedObject!.objectId!
                 if let pointer = self.selectedObject?["choreID"] as? PFObject {

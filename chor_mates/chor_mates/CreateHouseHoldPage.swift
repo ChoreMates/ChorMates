@@ -19,7 +19,7 @@ class CreateHouseHoldPage: ViewTextController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
+        let logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
         logoutButton.tintColor = UIColor.whiteColor()
         //logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Noteworthy", size: 20)!], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItem = logoutButton
@@ -40,16 +40,16 @@ class CreateHouseHoldPage: ViewTextController {
     
     @IBAction func HomeSweetHome(sender: UIButton) {
         DismissKeyboard()
-        if(householdName.text.isEmpty || address1.text.isEmpty) {
+        if(householdName.text!.isEmpty || address1.text!.isEmpty) {
             PopUp("Empty Fields", image: nil, msg: "You left something empty!", animate: true)
         }
         else {
-            var address: String = address1.text
-            if(!address2.text.isEmpty) {
+            var address: String = address1.text!
+            if(!address2.text!.isEmpty) {
                 address += ", \(address2.text)"
             }
         
-            var household = PFObject(className: "Household")
+            let household = PFObject(className: "Household")
             household["name"] = householdName.text
             household["createdBy"] = PFUser.currentUser()!
             household["address"] = address
@@ -57,7 +57,7 @@ class CreateHouseHoldPage: ViewTextController {
             household.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    var houseUser = PFObject(className: "Household_User")
+                    let houseUser = PFObject(className: "Household_User")
                     houseUser["householdID"] = household
                     houseUser["userID"] = PFUser.currentUser()!
                     houseUser.saveInBackgroundWithBlock {
@@ -70,7 +70,7 @@ class CreateHouseHoldPage: ViewTextController {
                             household.deleteInBackgroundWithBlock {
                                 (success: Bool, error: NSError?) -> Void in
                                 if (!success) {
-                                    println("Delete failed? \(error!.description)")
+                                    print("Delete failed? \(error!.description)")
                                     //Assuming the connection loss is the cause of the failure
                                     household.deleteEventually()
                                 }

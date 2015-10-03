@@ -22,7 +22,7 @@ class ViewTextController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
     }
     
@@ -62,8 +62,8 @@ class ViewTextController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     override func shouldAutorotate() -> Bool {
@@ -80,7 +80,7 @@ extension UITextField {
             return objc_getAssociatedObject(self, &kAssociationKeyNextField) as? UITextField
         }
         set(newField) {
-            objc_setAssociatedObject(self, &kAssociationKeyNextField, newField, UInt(OBJC_ASSOCIATION_RETAIN))
+            objc_setAssociatedObject(self, &kAssociationKeyNextField, newField, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     @IBOutlet var returnKey: UIButton? {
@@ -88,7 +88,7 @@ extension UITextField {
             return objc_getAssociatedObject(self, &kAssociationKeyNextKey) as? UIButton
         }
         set(newKey) {
-            objc_setAssociatedObject(self, &kAssociationKeyNextKey, newKey, UInt(OBJC_ASSOCIATION_RETAIN))
+            objc_setAssociatedObject(self, &kAssociationKeyNextKey, newKey, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 }

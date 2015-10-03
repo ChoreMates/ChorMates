@@ -12,7 +12,7 @@ class TableViewController: PFQueryTableViewController {
         super.init(style: style, className: className)
     }
     override func viewDidAppear(animated: Bool) {
-        var nav = self.navigationController?.navigationBar
+        let nav = self.navigationController?.navigationBar
         // 2
         //nav?.barStyle = UIBarStyle.
         nav?.tintColor = UIColor.blueColor()
@@ -27,7 +27,7 @@ class TableViewController: PFQueryTableViewController {
         super.viewDidLoad()
         
         //hide empty table rows
-        var tblView =  UIView(frame: CGRectZero)
+        //var tblView =  UIView(frame: CGRectZero)
         //  choreTableView.tableFooterView = tblView
         //  choreTableView.tableFooterView!.hidden = true
         //  choreTableView.backgroundColor = UIColor.clearColor()
@@ -36,7 +36,7 @@ class TableViewController: PFQueryTableViewController {
         
     }
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
         self.parseClassName = "Household_User"
@@ -47,12 +47,12 @@ class TableViewController: PFQueryTableViewController {
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
         
-        var query1 = PFQuery(className:"Household_User")
+        let query1 = PFQuery(className:"Household_User")
         // query2.includeKey("userID")
         query1.includeKey("householdID")
         query1.whereKey("userID", equalTo: PFUser.currentUser()!)
         
-        var query2 = PFQuery(className:"Household_User")
+        let query2 = PFQuery(className:"Household_User")
         query2.includeKey("userID")
         //query3.whereKey("householdID", matchesQuery: query1)
         query2.whereKey("householdID", matchesKey: "householdID", inQuery: query1)
@@ -73,12 +73,12 @@ class TableViewController: PFQueryTableViewController {
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
         
-        var dateCreated = object?.createdAt as NSDate?
-        var dateFormat = NSDateFormatter()
+        let dateCreated = object?.createdAt as NSDate?
+        let dateFormat = NSDateFormatter()
         dateFormat.dateFormat = "MMM dd, yyyy"
         
         
-        cell?.detailTextLabel?.text = "Joined: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+        cell?.detailTextLabel?.text = "Joined: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
         
         if let pointer = object?["userID"] as? PFObject {
             let fName = pointer["fName"] as! String
@@ -98,12 +98,12 @@ class TableViewController: PFQueryTableViewController {
         presentViewController(controller, animated: true, completion: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "toSettings" {
-            if let addExpenseViewController = segue.destinationViewController as? settingsView {
-                
-                
-            }
-        }
+//        if segue.identifier == "toSettings" {
+//            if let addExpenseViewController = segue.destinationViewController as? settingsView {
+//                
+//                
+//            }
+//        }
     }
     
     

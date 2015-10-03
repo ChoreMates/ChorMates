@@ -36,21 +36,21 @@ class RegisterPage: ViewTextController {
     
     @IBAction func AllSet(sender: UIButton) {
         DismissKeyboard()
-        if(fName.text.isEmpty || lName.text.isEmpty || email.text.isEmpty || password.text.isEmpty || valPass.text.isEmpty) {
+        if(fName.text!.isEmpty || lName.text!.isEmpty || email.text!.isEmpty || password.text!.isEmpty || valPass.text!.isEmpty) {
             PopUp("Empty Fields", image: nil, msg: "You left something empty!", animate: true)
         }
         else if(password.text != valPass.text)
         {
             PopUp("Mis-matching Pass", image: nil, msg: "You have mis-matching passwords!", animate: true)
         }
-        else if(email.text.rangeOfString(".") == nil || email.text.rangeOfString("@") == nil)
+        else if(email.text!.rangeOfString(".") == nil || email.text!.rangeOfString("@") == nil)
         {
             PopUp("E-Mail Error", image: nil, msg: "E-Mail is not in the proper format!", animate: true)
         }
         else
         {
             //All's good
-            var user = PFUser()
+            let user = PFUser()
             user.username = email.text
             user.email = email.text
             user.password = password.text
@@ -60,13 +60,13 @@ class RegisterPage: ViewTextController {
             user.signUpInBackgroundWithBlock {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if let error = error {
-                    let errorString = error.userInfo?["error"] as? String
+                    let errorString = error.userInfo["error"] as? String
                     self.PopUp("Sign Up Error", image: nil, msg: errorString!, animate: true)
-                    println(errorString!)
+                    print(errorString!)
                 }
                 else {
                     // Log new user in automatically
-                    PFUser.logInWithUsernameInBackground(self.email.text, password: self.password.text) {
+                    PFUser.logInWithUsernameInBackground(self.email.text!, password: self.password.text!) {
                         (user: PFUser?, error: NSError?) -> Void in
                         if user != nil {
                             self.PopUp("Sign Up Complete", image: nil, msg: "Sign Up Complete!\nE-Mail verification sent.", animate: true, onCloseFunc: self.ChangeToHouseHoldPage)

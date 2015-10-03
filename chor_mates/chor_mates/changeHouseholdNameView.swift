@@ -29,11 +29,11 @@ class changeHouseholdNameView: UITableViewController {
         //save new household name
         else
         {
-            var query = PFQuery(className:"Household")
+            let query = PFQuery(className:"Household")
             query.getObjectInBackgroundWithId(householdID!) {
                 (houesehold: PFObject?, error: NSError?) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                 } else if let houesehold = houesehold {
                     houesehold["name"] = self.houseHoldNameField.text
                     houesehold.saveInBackground()
@@ -51,7 +51,7 @@ class changeHouseholdNameView: UITableViewController {
         super.viewDidLoad()
         
         //retrieve current household name
-        var query = PFQuery(className: "Household_User")
+        let query = PFQuery(className: "Household_User")
         query.includeKey("householdID")
         query.includeKey("userID")
         query.whereKey("userID", equalTo: PFUser.currentUser()!)
@@ -67,7 +67,7 @@ class changeHouseholdNameView: UITableViewController {
                 if let objects = objects as? [PFObject]
                 {
                     if let pointer = objects[0]["householdID"] as? PFObject {
-                        self.houseHoldNameField.text = pointer["name"] as! String
+                        self.houseHoldNameField.text = (pointer["name"] as! String)
                         self.householdID = pointer.objectId!
                         
                         
@@ -79,7 +79,7 @@ class changeHouseholdNameView: UITableViewController {
             else
             {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
 

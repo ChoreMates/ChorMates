@@ -38,13 +38,13 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
             // store the new word
             if(inputTextField != nil)
             {
-                self.suppliesList.append(inputTextField!.text)
-                var currChore: PFObject = self.currPFObject!
+                self.suppliesList.append(inputTextField!.text!)
+                let currChore: PFObject = self.currPFObject!
                 currChore["expensesList"] = self.suppliesList
                 currChore.saveInBackgroundWithBlock {
                     (success: Bool, error: NSError?) -> Void in
                     if (success) {
-                        println("The object has been saved.")
+                        print("The object has been saved.")
                     } else {
                         // There was a problem, check error.description
                     }
@@ -63,23 +63,23 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
     override func viewDidAppear(animated: Bool) {
         
         
-        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
         
         self.suppliesTableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
         
         
         //remove empty cells from table view
-        var tblView =  UIView(frame: CGRectZero)
+        let tblView =  UIView(frame: CGRectZero)
         suppliesTableView.tableFooterView = tblView
         suppliesTableView.tableFooterView!.hidden = true
         suppliesTableView.backgroundColor = UIColor.clearColor()
         
         //remove key pad when elsewhere tapped
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         
         
-        var query = PFQuery(className: "Chore_User")
+        let query = PFQuery(className: "Chore_User")
         query.whereKey("objectId", equalTo: choreID)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -87,7 +87,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
             if error == nil
             {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) scores.")
+                print("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
                 if let objects = objects as? [PFObject]
                 {
@@ -97,7 +97,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
                         self.currPFObject = object
                         if(object["expensesList"] != nil){
                             self.suppliesList = object["expensesList"] as! [String]
-                            println (self.suppliesList[0])
+                            print (self.suppliesList[0])
                         }
                         
                     }
@@ -107,7 +107,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
             else
             {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
             dispatch_async(dispatch_get_main_queue()){
                 self.suppliesTableView.reloadData();
@@ -140,7 +140,7 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("SupplyCell") as! UITableViewCell
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("SupplyCell")! as UITableViewCell
         
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
@@ -155,25 +155,25 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
         if(self.amountLabel.isFirstResponder())
         {
             view.endEditing(true)
-            if(self.amountLabel.text.rangeOfString("$") == nil){
+            if(self.amountLabel.text!.rangeOfString("$") == nil){
                 
                 let formatter = NSNumberFormatter()
                 formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
                 formatter.locale = NSLocale(localeIdentifier: "en_US")
-                var numberFromField = (NSString(string: self.amountLabel.text).doubleValue)
+                let numberFromField = (NSString(string: self.amountLabel.text!).doubleValue)
                 self.amountLabel.text = formatter.stringFromNumber(numberFromField)
                 
             }
             //save the amount typed by the user when focus is changed
             self.amountLabel.resignFirstResponder()
-            var currChore: PFObject = self.currPFObject!
+            let currChore: PFObject = self.currPFObject!
             if(currChore["expenseAmount"] as! String! != self.amountLabel.text)
             {
                 currChore["expenseAmount"] = self.amountLabel.text
                 currChore.saveInBackgroundWithBlock {
                     (success: Bool, error: NSError?) -> Void in
                     if (success) {
-                        println("The object has been saved.")
+                        print("The object has been saved.")
                     } else {
                         // There was a problem, check error.description
                     }
@@ -190,12 +190,12 @@ class addExpense: UIViewController, UITableViewDelegate, UITableViewDataSource{
             
             suppliesList.removeAtIndex(indexPath.row)
             suppliesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            var currChore: PFObject = self.currPFObject!
+            let currChore: PFObject = self.currPFObject!
             currChore["expensesList"] = self.suppliesList
             currChore.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    println("The object has been saved.")
+                    print("The object has been saved.")
                 } else {
                     // There was a problem, check error.description
                 }

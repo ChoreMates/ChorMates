@@ -45,8 +45,8 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var toPFObject: PFObject!
     
     @IBAction func swapPressed(sender: UIButton) {
-        if(!self.choremateTextField.text.isEmpty && !self.chorePickedTextField.text.isEmpty) {
-            var choreRequest = PFObject(className:"Chore_Request")
+        if(!self.choremateTextField.text!.isEmpty && !self.chorePickedTextField.text!.isEmpty) {
+            let choreRequest = PFObject(className:"Chore_Request")
             choreRequest["senderUserID"] = fromPFObject["userID"]
             choreRequest["toUserID"] = toPFObject["userID"]
             choreRequest["senderChoreID"] = fromPFObject["choreID"]
@@ -71,8 +71,8 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         super.viewDidLoad()
         
         //set up picker view
-        var pickerFrame: CGRect = CGRectMake(17, 52, 270, 100)
-        var chorematePicker: UIPickerView = UIPickerView(frame: pickerFrame)
+        let pickerFrame: CGRect = CGRectMake(17, 52, 270, 100)
+        let chorematePicker: UIPickerView = UIPickerView(frame: pickerFrame)
         chorematePicker.showsSelectionIndicator = true
         chorematePicker.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
 
@@ -82,12 +82,12 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         chorematePicker.showsSelectionIndicator = true
         self.choremateTextField.inputView = chorematePicker
         
-        var query1 = PFQuery(className:"Household_User")
+        let query1 = PFQuery(className:"Household_User")
         // query2.includeKey("userID")
         query1.includeKey("householdID")
         query1.whereKey("userID", equalTo: PFUser.currentUser()!)
         
-        var houseUserQuery = PFQuery(className:"Household_User")
+        let houseUserQuery = PFQuery(className:"Household_User")
         houseUserQuery.includeKey("userID")
         houseUserQuery.whereKey("householdID", matchesKey: "householdID", inQuery: query1)
         houseUserQuery.whereKey("userID", notEqualTo: PFUser.currentUser()!)
@@ -97,15 +97,15 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             if error == nil {
                 if let objects = objects as? [PFObject] {
                     for object: PFObject in objects {
-                        if let pointer = object["userID"] as? PFObject {
-                            let fName = pointer["fName"] as! String
-                            let lName = pointer["lName"] as! String
+                        if /*let pointer = */(object["userID"] as? PFObject != nil) {
+                            //let fName = pointer["fName"] as! String
+                            //let lName = pointer["lName"] as! String
                             self.chorematesList.append(object)
                         }
                     }
                 }
                 else {
-                    println("Error: \(error!) \(error!.userInfo!)")
+                    print("Error: \(error!) \(error!.userInfo)")
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -114,7 +114,7 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 }
             }
         }
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissPicker")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissPicker")
         view.addGestureRecognizer(tap)
     }
     
@@ -128,7 +128,7 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         return self.chorematesList.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let pointer = chorematesList[row]["userID"] as! PFObject
         let fName = pointer["fName"] as! String
         let lName = pointer["lName"] as! String
@@ -153,7 +153,7 @@ class addRequest: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         let titleData = fName + " " + lName
         self.userSwapWithID = pointer.objectId!
         
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.darkGrayColor()])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.darkGrayColor()])
         
         return myTitle
     }

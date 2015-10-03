@@ -34,7 +34,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         requestsTable.dataSource = self
         
         //hide empty table rows
-        var tblView =  UIView(frame: CGRectZero)
+        let tblView =  UIView(frame: CGRectZero)
         requestsTable.tableFooterView = tblView
         requestsTable.tableFooterView!.hidden = true
         requestsTable.backgroundColor = UIColor.clearColor()
@@ -59,7 +59,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return "Outgoing Requests"
         }
         else {
-            println("Not a section!")
+            print("Not a section!")
             return "Fake!"
         }
     }
@@ -74,9 +74,9 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func retrieveObjectsFromParse()
     {
         let me = PFUser.currentUser()!
-        var count = 0;
+        //var count = 0;
         
-        var inQuery = PFQuery(className: "Chore_Request")
+        let inQuery = PFQuery(className: "Chore_Request")
         inQuery.includeKey("senderChoreID")
         inQuery.includeKey("senderUserID")
         inQuery.includeKey("toChoreID")
@@ -105,11 +105,11 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
             else {
-                println("Error Incoming! \(error?.description)")
+                print("Error Incoming! \(error?.description)")
             }
         }
         
-        var outQuery = PFQuery(className: "Chore_Request")
+        let outQuery = PFQuery(className: "Chore_Request")
         outQuery.includeKey("senderChoreID")
         outQuery.includeKey("toChoreID")
         outQuery.includeKey("toUserID")
@@ -138,26 +138,26 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
             else {
-                println("Error Outgoing! \(error?.description)")
+                print("Error Outgoing! \(error?.description)")
             }
         }
         
-        var hhUserQuery = PFQuery(className: "Household_User")
+        let hhUserQuery = PFQuery(className: "Household_User")
         hhUserQuery.includeKey("householdID")
         hhUserQuery.whereKey("userID", equalTo: me)
         hhUserQuery.findObjectsInBackgroundWithBlock {
             (usersHH: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 if(usersHH!.count == 0) {
-                    println("None found! Weird....")
+                    print("None found! Weird....")
                 }
                 else {
                     if let usersHH = usersHH as? [PFObject] {
-                        var userHH = usersHH.first!
-                        var hh = userHH["householdID"]! as! PFObject
+                        let userHH = usersHH.first!
+                        let hh = userHH["householdID"]! as! PFObject
                         
                         self.myHousehold = hh
-                        var hhQuery = PFQuery(className: "HouseInvitation")
+                        let hhQuery = PFQuery(className: "HouseInvitation")
                         hhQuery.includeKey("userID")
                         hhQuery.orderByDescending("createdAt")
                         hhQuery.whereKey("householdID", equalTo: userHH["householdID"]!)
@@ -188,7 +188,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
             else {
-                println("Error Household! \(error?.description)")
+                print("Error Household! \(error?.description)")
             }
         }
     }
@@ -201,7 +201,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
         
         var currObj: PFObject!
         
@@ -218,7 +218,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         if(indexPath.section == 0 || indexPath.section == 1) {
-            var acceptAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            let acceptAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                 let alertBox = UIAlertController(title: nil, message: "Accept Request", preferredStyle: .Alert)
                 
                 let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default) {
@@ -241,90 +241,90 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     currObj.deleteInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
-                            println("The object has been removed. Going to start the save!")
+                            print("The object has been removed. Going to start the save!")
                             
                             if(indexPath.section == 0) {
-                                var userHH = PFObject(className: "Household_User")
+                                let userHH = PFObject(className: "Household_User")
                                 userHH["userID"] = user!
                                 userHH["householdID"] = self.myHousehold!
                                 userHH.saveInBackgroundWithBlock {
                                     (success: Bool, error: NSError?) -> Void in
                                     if (success) {
-                                        println("The object has been saved!")
+                                        print("The object has been saved!")
                                         self.refreshTableView(PFUser.currentUser()!)
                                     }
                                     else {
-                                        println("Error!! \(error?.description)")
+                                        print("Error!! \(error?.description)")
                                     }
                                 }
                             }
                             else { //indexPath.section == 2
                                 //Assign other chore to me
-                                var query = PFQuery(className: "Chore_User")
+                                let query = PFQuery(className: "Chore_User")
                                 query.whereKey("choreID", equalTo: myNewChore!)
                                 query.whereKey("userID", equalTo: user!)
                                 query.findObjectsInBackgroundWithBlock {
                                     (choreUsers: [AnyObject]?, error: NSError?) -> Void in
                                     if error == nil {
                                         if(choreUsers!.count == 0) {
-                                            println("Can't find my new chore!")
+                                            print("Can't find my new chore!")
                                         }
                                         else {
-                                            println("Found something goooood!")
+                                            print("Found something goooood!")
                                             if let choreUsers = choreUsers as? [PFObject] {
-                                                var choreUser = choreUsers.first!
+                                                let choreUser = choreUsers.first!
                                                 choreUser["swapID"] = PFUser.currentUser()!
                                                 choreUser.saveInBackgroundWithBlock {
                                                     (success: Bool, error: NSError?) -> Void in
                                                     if (success) {
-                                                        println("Got his chore!")
+                                                        print("Got his chore!")
                                                     }
                                                     else {
-                                                        println("Error?!?! \(error?.description)")
+                                                        print("Error?!?! \(error?.description)")
                                                     }
                                                 }
                                             }
                                         }
                                     }
                                     else {
-                                        println("Error!?! \(error?.description)")
+                                        print("Error!?! \(error?.description)")
                                     }
                                 }
                                 //Assign my chore to other
-                                var query2 = PFQuery(className: "Chore_User")
+                                let query2 = PFQuery(className: "Chore_User")
                                 query2.whereKey("choreID", equalTo: myOldChore!)
                                 query2.whereKey("userID", equalTo: PFUser.currentUser()!)
                                 query2.findObjectsInBackgroundWithBlock {
                                     (choreUsers: [AnyObject]?, error: NSError?) -> Void in
                                     if error == nil {
                                         if(choreUsers!.count == 0) {
-                                            println("Can't find my old chore!")
+                                            print("Can't find my old chore!")
                                         }
                                         else {
                                             if let choreUsers = choreUsers as? [PFObject] {
-                                                var choreUser = choreUsers.first!
+                                                let choreUser = choreUsers.first!
                                                 choreUser["swapID"] = user!
                                                 choreUser.saveInBackgroundWithBlock {
                                                     (success: Bool, error: NSError?) -> Void in
                                                     if (success) {
-                                                        println("Gave him my chore!")
+                                                        print("Gave him my chore!")
                                                         self.refreshTableView(PFUser.currentUser()!)
                                                     }
                                                     else {
-                                                        println("Error?!?! \(error?.description)")
+                                                        print("Error?!?! \(error?.description)")
                                                     }
                                                 }
                                             }
                                         }
                                     }
                                     else {
-                                        println("Error!?! \(error?.description)")
+                                        print("Error!?! \(error?.description)")
                                     }
                                 }
                             }
                         }
                         else {
-                            println("Error?! \(error?.description)")
+                            print("Error?! \(error?.description)")
                         }
                     }
                 }
@@ -336,7 +336,7 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.presentViewController(alertBox, animated: true, completion: nil)
             })
             
-            var rejectAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            let rejectAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
                 let alertBox = UIAlertController(title: nil, message: "Reject Request", preferredStyle: .Alert)
                 
                 let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default)
@@ -345,12 +345,12 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         currObj.deleteInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {
-                                println("The object has been removed.")
+                                print("The object has been removed.")
                                 
                                 self.refreshTableView(PFUser.currentUser()!)
                             }
                             else {
-                                println("Error?! \(error?.description)")
+                                print("Error?! \(error?.description)")
                             }
                         }
                 }
@@ -367,8 +367,8 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return [acceptAction, rejectAction]
         }
         else { //indexPath.section == 2
-            var cancelAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-                var alertBox = UIAlertController(title: nil, message: "Cancel Request", preferredStyle: .Alert)
+            let cancelAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+                let alertBox = UIAlertController(title: nil, message: "Cancel Request", preferredStyle: .Alert)
                 
                 let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Default)
                     { action -> Void in
@@ -376,12 +376,12 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         currObj.deleteInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {
-                                println("The object has been removed.")
+                                print("The object has been removed.")
                                 
                                 self.refreshTableView(PFUser.currentUser()!)
                             }
                             else {
-                                println("Error?! \(error?.description)")
+                                print("Error?! \(error?.description)")
                             }
                         }
                 }
@@ -421,15 +421,15 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        var cell:RequestTableCell = tableView.dequeueReusableCellWithIdentifier("RequestCell") as! RequestTableCell
+        let cell:RequestTableCell = tableView.dequeueReusableCellWithIdentifier("RequestCell") as! RequestTableCell
         
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
         
         if( indexPath.section == 0 && householdReq.count != 0) {
             if let pointer = householdReq[indexPath.row]["userID"] as? PFUser {
-                var fName = pointer["fName"] as! String
-                var lName = pointer["lName"] as! String
+                let fName = pointer["fName"] as! String
+                let lName = pointer["lName"] as! String
                 let name = fName + " " + lName
                 cell.reqText.text! = "Let me in!"
                 cell.reqText2.text! = name
@@ -437,10 +437,10 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.from.text! = pointer.username!
             }
             
-            var dateCreated = householdReq[indexPath.row].createdAt
-            var dateFormat = NSDateFormatter()
+            let dateCreated = householdReq[indexPath.row].createdAt
+            let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "MM.dd.yyyy"
-            cell.reqDate.text! = "Reqested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+            cell.reqDate.text! = "Reqested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
         }
         else if(indexPath.section == 1 && inReq.count != 0) {
             if let fromChore = inReq[indexPath.row]["senderChoreID"] as? PFObject {
@@ -453,10 +453,10 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.from.text! = (fromPerson["fName"]! as! String)
             }
             
-            var dateCreated = inReq[indexPath.row].createdAt
-            var dateFormat = NSDateFormatter()
+            let dateCreated = inReq[indexPath.row].createdAt
+            let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "MM.dd.yyyy"
-            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
         }
         else if(indexPath.section == 2 && outReq.count != 0) {
             if let toChore = outReq[indexPath.row]["senderChoreID"] as? PFObject {
@@ -469,10 +469,10 @@ class Requests: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.from.text! = (toPerson["fName"]! as! String)
             }
             
-            var dateCreated = outReq[indexPath.row].createdAt
-            var dateFormat = NSDateFormatter()
+            let dateCreated = outReq[indexPath.row].createdAt
+            let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "MM.dd.yyyy"
-            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+            cell.reqDate.text! = "Requested: " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
         }
         return cell
     }

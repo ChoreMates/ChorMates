@@ -23,7 +23,7 @@ class LoginPage: ViewTextController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        var currentUser = PFUser.currentUser()
+        let currentUser = PFUser.currentUser()
         if(currentUser != nil) {
             HasHousehold(currentUser, msg: "Welcome back, \(currentUser!.username!)!")
         }
@@ -38,9 +38,9 @@ class LoginPage: ViewTextController {
         DismissKeyboard()
         
         //Validate the username and password
-        if(!userName.text.isEmpty && !password.text.isEmpty)
+        if(!userName.text!.isEmpty && !password.text!.isEmpty)
         {
-            PFUser.logInWithUsernameInBackground(userName.text, password:password.text) {
+            PFUser.logInWithUsernameInBackground(userName.text!, password:password.text!) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
                     self.HasHousehold(user, msg: "Sucessful Login! Welcome back!")
@@ -57,18 +57,18 @@ class LoginPage: ViewTextController {
     func HasHousehold(user: PFUser?, msg: String)
     {
         if(user != nil) {
-            var query = PFQuery(className: "Household_User")
+            let query = PFQuery(className: "Household_User")
             query.whereKey("userID", equalTo: user!)
             
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]?, error: NSError?) -> Void in
                 if error == nil {
-                    var redirectHome = (objects!.count == 0) ? false : true
+                    let redirectHome = (objects!.count == 0) ? false : true
                     self.RedirectTo(redirectHome, msg: msg)
                 }
                 else {
                     // Log details of the failure
-                    println("Error: \(error!) \(error!.userInfo!)")
+                    print("Error: \(error!) \(error!.userInfo)")
                 }
             }
         }

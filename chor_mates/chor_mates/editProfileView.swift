@@ -27,15 +27,15 @@ class editProfileView: UITableViewController {
         else
         {
            //save to database
-            PFUser.currentUser()!.setObject(self.emailField.text, forKey: "username")
-            PFUser.currentUser()!.setObject(self.emailField.text, forKey: "email")
-            PFUser.currentUser()?.setObject(self.firstNameField.text, forKey: "fName")
-            PFUser.currentUser()?.setObject(self.lastNameField.text, forKey: "lName")
+            PFUser.currentUser()!.setObject(self.emailField.text!, forKey: "username")
+            PFUser.currentUser()!.setObject(self.emailField.text!, forKey: "email")
+            PFUser.currentUser()?.setObject(self.firstNameField.text!, forKey: "fName")
+            PFUser.currentUser()?.setObject(self.lastNameField.text!, forKey: "lName")
             PFUser.currentUser()?.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 
                 if (success) {
-                    println(success)
+                    print(success)
                     self.performSegueWithIdentifier("unWindtoSettingsFromProfile", sender: self)
                     
                     // self.navigationController?.popToRootViewControllerAnimated(true)
@@ -49,7 +49,7 @@ class editProfileView: UITableViewController {
                         alert.addButtonWithTitle("OK")
                         alert.show()
                     }
-                    println(error!.description)
+                    print(error!.description)
                 }
                 
             }

@@ -21,7 +21,7 @@ class changePasswordView: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tblView =  UIView(frame: CGRectZero)
+        let tblView =  UIView(frame: CGRectZero)
         changePasswordTableView.tableFooterView = tblView
         changePasswordTableView.tableFooterView!.hidden = true
        // changePasswordTableView.backgroundColor = UIColor.whiteColor()
@@ -43,7 +43,7 @@ class changePasswordView: UITableViewController {
         {
             //login to check if users entered current password correctly
             PFUser.logInWithUsernameInBackground(PFUser.currentUser()!.email!,
-                password:initialPassword.text){ (user: PFUser?, error: NSError?) -> Void in
+                password:initialPassword.text!){ (user: PFUser?, error: NSError?) -> Void in
                 
                     if(user == nil){
                         let alert = UIAlertView()
@@ -71,12 +71,12 @@ class changePasswordView: UITableViewController {
                     (success: Bool, error: NSError?) -> Void in
                     
                     if (success) {
-                        println(success)
+                        print(success)
                         self.performSegueWithIdentifier("unWindtoSettingsFromPassword", sender: self)
 
                      
                     } else {
-                        println(error!.description)
+                        print(error!.description)
                     }
                    
                 }

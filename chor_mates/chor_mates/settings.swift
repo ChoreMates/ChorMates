@@ -44,7 +44,7 @@ class settingsView: UITableViewController {
     
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var section = indexPath.section
+        let section = indexPath.section
         //account section
         if(section==0){
             
@@ -61,7 +61,7 @@ class settingsView: UITableViewController {
                     { action -> Void in
                         
                         //delete the record for which household the user is in currently
-                        var deleteHouseholdUsers = PFQuery(className: "Household_User")
+                        let deleteHouseholdUsers = PFQuery(className: "Household_User")
                         deleteHouseholdUsers.whereKey("userID", equalTo: PFUser.currentUser()!)
                         
                         deleteHouseholdUsers.findObjectsInBackgroundWithBlock {
@@ -70,7 +70,7 @@ class settingsView: UITableViewController {
                             if error == nil
                             {
                                 // The find succeeded.
-                                println("Successfully retrieved \(objects!.count) chores.")
+                                print("Successfully retrieved \(objects!.count) chores.")
                                 // Do something with the found objects
                                 if let objects = objects as? [PFObject]
                                 {
@@ -79,13 +79,13 @@ class settingsView: UITableViewController {
                             }
                             else
                             {
-                                println("error")
+                                print("error")
                                 
                             }
                         }
 
                         //delete all chores associated with the user
-                        var deleteChoreUsers = PFQuery(className: "Chore_User")
+                        let deleteChoreUsers = PFQuery(className: "Chore_User")
                         deleteChoreUsers.whereKey("userID", equalTo: PFUser.currentUser()!)
                         
                         deleteChoreUsers.findObjectsInBackgroundWithBlock {
@@ -94,7 +94,7 @@ class settingsView: UITableViewController {
                             if error == nil
                             {
                                 // The find succeeded.
-                                println("Successfully retrieved \(objects!.count) chores.")
+                                print("Successfully retrieved \(objects!.count) chores.")
                                 // Do something with the found objects
                                 if let objects = objects as? [PFObject]
                                 {
@@ -103,7 +103,7 @@ class settingsView: UITableViewController {
                             }
                             else
                             {
-                                println("error")
+                                print("error")
                                 
                             }
                         }

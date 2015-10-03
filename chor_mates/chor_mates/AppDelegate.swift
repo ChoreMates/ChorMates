@@ -56,10 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
-        return visibleViewController.supportedInterfaceOrientations()
+    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return visibleViewController!.supportedInterfaceOrientations()
     }
     public override func shouldAutorotate() -> Bool {
-        return visibleViewController.shouldAutorotate()
+        return visibleViewController!.shouldAutorotate()
     }
 }

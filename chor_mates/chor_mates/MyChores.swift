@@ -25,14 +25,14 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func retrieveObjectsFromParse()
     {
         //only retreive objects that end after previous month
-        var components = NSDateComponents()
-        components.setValue(-1, forComponent: NSCalendarUnit.CalendarUnitMonth);
+        let components = NSDateComponents()
+        components.setValue(-1, forComponent: NSCalendarUnit.Month);
         let date: NSDate = NSDate()
-        var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
+        let expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))
         
         //  var userQuery = PFQuery(className:"_User")
         //  userQuery.whereKey("username", equalTo: "lol@lol.com")
-        var query = PFQuery(className: "Chore_User")
+        let query = PFQuery(className: "Chore_User")
         query.includeKey("choreID")
         query.includeKey("userID")
         query.whereKey("userID", equalTo: PFUser.currentUser()!)
@@ -47,7 +47,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if error == nil
             {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) scores.")
+                print("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
                 if let objects = objects as? [PFObject]
                 {
@@ -56,12 +56,12 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.choreObjectFuture.removeAll(keepCapacity: false)
                     for object: PFObject in objects
                     {
-                        var dateCreated = object["endDate"] as! NSDate?
-                        var components = NSDateComponents()
-                        components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
+                        let dateCreated = object["endDate"] as! NSDate?
+                        let components = NSDateComponents()
+                        components.setValue(7, forComponent: NSCalendarUnit.Day);
                         let date: NSDate = NSDate()
                         
-                        var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
+                        let expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))
                         
                         //if the chore ends within a week from today
                         if (dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedAscending) && (dateCreated!.compare(date) == NSComparisonResult.OrderedDescending)
@@ -81,7 +81,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             else
             {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
         
@@ -111,7 +111,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         
         //hide empty table rows
-        var tblView =  UIView(frame: CGRectZero)
+        let tblView =  UIView(frame: CGRectZero)
         choreTableView.tableFooterView = tblView
         choreTableView.tableFooterView!.hidden = true
         choreTableView.backgroundColor = UIColor.clearColor()
@@ -136,7 +136,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
         
         var currChore: PFObject!
         if(indexPath.section == 0)
@@ -149,7 +149,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             currChore = self.choreObjectFuture[indexPath.row]
         }
         //request action
-        var requestAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Request" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let requestAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Request" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             if(indexPath.section == 0)
             {
@@ -176,7 +176,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         })
         //expense action
-        var expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let expenseAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Expense" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             if(indexPath.section == 0)
             {
@@ -191,7 +191,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         })
         //done chore action
-        var doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let doneAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Done" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             let doneMenu = UIAlertController(title: nil, message: "Confirm Completion", preferredStyle: .Alert)
             
@@ -202,7 +202,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     currChore.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                         if (success) {
-                            println("The object has been saved.")
+                            print("The object has been saved.")
                         } else {
                             // There was a problem, check error.description
                         }
@@ -266,7 +266,7 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        var cell:MyChoreTableCell = tableView.dequeueReusableCellWithIdentifier("Cell2") as! MyChoreTableCell
+        let cell:MyChoreTableCell = tableView.dequeueReusableCellWithIdentifier("Cell2") as! MyChoreTableCell
         
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = false;
@@ -274,12 +274,12 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         if( indexPath.section == 0){
             
-            var dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
-            var components = NSDateComponents()
-            components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
+            let dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
+            let components = NSDateComponents()
+            components.setValue(7, forComponent: NSCalendarUnit.Day);
             let date: NSDate = NSDate()
             
-            var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
+            let expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))
             
             if dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedAscending
             {
@@ -289,18 +289,18 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 if( choreObjectCurrent[indexPath.row]["status"] as! String! == "pending")
                 {
-                    var dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
+                    let dateCreated = choreObjectCurrent[indexPath.row]["endDate"] as! NSDate?
+                    let dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
-                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
                     
                 }
                 else
                 {
-                    var dateCreated = choreObjectCurrent[indexPath.row]["completedDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
+                    let dateCreated = choreObjectCurrent[indexPath.row]["completedDate"] as! NSDate?
+                    let dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
-                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
                     
                 }
                 if(choreObjectCurrent[indexPath.row]["expenseAmount"] != nil)
@@ -316,12 +316,12 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         else if(indexPath.section == 1){
             
-            var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
-            var components = NSDateComponents()
-            components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitDay);
+            let dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
+            let components = NSDateComponents()
+            components.setValue(7, forComponent: NSCalendarUnit.Day);
             let date: NSDate = NSDate()
             
-            var expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))
+            let expirationDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(rawValue: 0))
             
             if dateCreated!.compare(expirationDate!) == NSComparisonResult.OrderedDescending
             {
@@ -334,21 +334,21 @@ class MyChores: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 
                 
                 if( choreObjectFuture[indexPath.row]["status"] as! String! == "pending"){
-                    var dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
+                    let dateCreated = choreObjectFuture[indexPath.row]["endDate"] as! NSDate?
+                    let dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
                     
                     
-                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+                    cell.choreDueDate?.text = "Due " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
                     
                 }
                 else{
-                    var dateCreated = choreObjectFuture[indexPath.row]["completedDate"] as! NSDate?
-                    var dateFormat = NSDateFormatter()
+                    let dateCreated = choreObjectFuture[indexPath.row]["completedDate"] as! NSDate?
+                    let dateFormat = NSDateFormatter()
                     dateFormat.dateFormat = "MM.dd.yyyy"
                     
                     
-                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as! String)
+                    cell.choreDueDate?.text = "Completed " + (NSString(format: "%@", dateFormat.stringFromDate(dateCreated!)) as String)
                     
                 }
                 

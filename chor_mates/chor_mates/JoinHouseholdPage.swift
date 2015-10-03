@@ -15,11 +15,11 @@ class JoinHouseholdPage: ViewTextController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
+        let logoutButton: UIBarButtonItem = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "LogOut")
         logoutButton.tintColor = UIColor.whiteColor()
         self.navigationItem.rightBarButtonItem = logoutButton
         
-        var query = PFQuery(className: "HouseInvitation")
+        let query = PFQuery(className: "HouseInvitation")
         query.whereKey("userID", equalTo: PFUser.currentUser()!)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -41,8 +41,8 @@ class JoinHouseholdPage: ViewTextController {
     }
     
     @IBAction func LetMeIn(sender: UIButton) {
-        if(!email.text.isEmpty) {
-            if(email.text.rangeOfString(".") == nil || email.text.rangeOfString("@") == nil) {
+        if(!email.text!.isEmpty) {
+            if(email.text!.rangeOfString(".") == nil || email.text!.rangeOfString("@") == nil) {
                 PopUp("E-Mail Error", image: nil, msg: "E-Mail is not in the proper format!", animate: true)
             }
             else if(email.text == PFUser.currentUser()!.email!) {
@@ -50,9 +50,9 @@ class JoinHouseholdPage: ViewTextController {
             }
             else {
                 //Find household of user based on email address
-                var query = PFQuery(className: "Household_User")
-                var inner = PFUser.query()!
-                inner.whereKey("email", equalTo:email.text)
+                let query = PFQuery(className: "Household_User")
+                let inner = PFUser.query()!
+                inner.whereKey("email", equalTo:email.text!)
                 query.whereKey("userID", matchesQuery: inner)
                 query.findObjectsInBackgroundWithBlock {
                     (usersHH: [AnyObject]?, error: NSError?) -> Void in
@@ -62,9 +62,9 @@ class JoinHouseholdPage: ViewTextController {
                         }
                         else {
                             if let usersHH = usersHH as? [PFObject] {
-                                var userHH = usersHH.first!
+                                let userHH = usersHH.first!
                                 //Create HouseInvitation object and send email to household owner
-                                var houseInvite = PFObject(className: "HouseInvitation")
+                                let houseInvite = PFObject(className: "HouseInvitation")
                                 houseInvite["userID"] = PFUser.currentUser()
                                 houseInvite["householdID"] = userHH["householdID"]!
                                 houseInvite["status"] = false
@@ -102,7 +102,7 @@ class JoinHouseholdPage: ViewTextController {
                                     }
                                     else {
                                         self.PopUp("Request Not Sent", image: nil, msg: "Could not send request!\nPlease try again.", animate: true,  onCloseFunc: nil)
-                                        println("Error3: \(error2!) \(error2!.userInfo!)")
+                                        print("Error3: \(error2!) \(error2!.userInfo)")
                                     }
                                 }
                             }
@@ -110,7 +110,7 @@ class JoinHouseholdPage: ViewTextController {
                     }
                     else {
                         self.PopUp("Request Not Sent", image: nil, msg: "Request could not be sent!\nPlease try again.", animate: true)
-                        println("Error: \(error!) \(error!.userInfo!)")
+                        print("Error: \(error!) \(error!.userInfo)")
                     }
                 }
             }
